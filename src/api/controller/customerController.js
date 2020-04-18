@@ -1,7 +1,7 @@
 const responses = require('../../constants/response');
 const customerService = require('../../service/customerService');
 
-const signup = (req,res) =>{
+const signup = async (req,res) =>{
     
     let response={ ...responses.responseDetails.defaultResponse };
     

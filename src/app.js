@@ -6,7 +6,7 @@ const YAML = require('yamljs');
 const customerRouter = require('./router/customer');
 
 const swaggerDocument = YAML.load(__dirname+'/api/endpoints/customer.yaml');
-const dbConnection = require('./database/connection');
+const dbConnection = require('./db/connection');
 
 const app = express();
 
