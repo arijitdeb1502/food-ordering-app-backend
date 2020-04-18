@@ -8,7 +8,7 @@ const signup = async (req,res) =>{
     try{
 
         const responseFromService = await customerService.signup(req.body);
-        response.status=responses.responseDetails.customerSignupSuccess.status;
+        response.status=responses.responseDetails.customerSignupSuccess.message;
        //response.message=responses.responseDetails.customerSignupSuccess.message;
         response.id=responseFromService.id;   
 
