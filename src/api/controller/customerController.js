@@ -9,8 +9,8 @@ const signup = async (req,res) =>{
 
         const responseFromService = await customerService.signup(req.body);
         response.status=responses.responseDetails.customerSignupSuccess.status;
-        response.message=responses.responseDetails.customerSignupSuccess.message;
-        response.body=responseFromService;   
+       //response.message=responses.responseDetails.customerSignupSuccess.message;
+        response.id=responseFromService.id;   
 
     }catch(error){
         console.log('Something went wrong: customerController: signup', error);

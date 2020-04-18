@@ -1,10 +1,7 @@
 const responseDetails = {
     defaultResponse : {
-        status : 400,
-        message: '',
-        body:{
-
-        }
+        id: '',
+        status : 400
     },
     invalidRequestSchemaResponse : {
         BAD_REQUEST : "Invalid input request schema!!"
