@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi');
 const responses = require('../../constants/response');
 
 const validateObjectSchema = (data, schema) => {
-    const result = Joi.validate(data, schema, { convert: false });
+    const result = schema.validate(data);
     if (result.error) {
       const errorDetails = result.error.details.map(value => {
         return {

@@ -3,7 +3,7 @@ info:
   title: Customer API
   version: 1.0.0
   description: API of Customer Services
-host: FoodOrderingApp.io
+host: localhost:3001
 schemes:
   - http
   - https
