@@ -36,9 +36,7 @@ const customerSchema = new mongoose.Schema({
         trim: true,
         validate(value) {
             if(value.length!=10){
-                let messageCode=responses.responseDetails.customerSignupExceptions.invalidContactException.exceptionCode;
-                let messageText=responses.responseDetails.customerSignupExceptions.invalidContactException.message;  
-                throw new Error(`${messageCode}:${messageText}`);
+                throw new SignupRestrictedException('SGR-003','Invalid contact number!');
             }
         }
     },
