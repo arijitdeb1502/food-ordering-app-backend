@@ -1,35 +1,17 @@
-const responseDetails = {
-    defaultResponse : {
-        id: '',
-        status : 400
-    },
+const responseDetails = {    
     invalidRequestSchemaResponse : {
-        BAD_REQUEST : "Invalid input request schema!!"
+        BAD_REQUEST_MESSAGE : "Invalid input request schema!!"
     },
-    customerSignupExceptions : {
-        duplicateContactException : {
-            exceptionCode : "SGR-001",
-            message : "This contact number is already registered! Try other contact number."
-        },
-        emptyFormFieldException : {
-            exceptionCode : "SGR-005",
-            message : "Except last name all fields should be filled."
-        },
-        invalidEmailException : {
-            exceptionCode : "SGR-002",
-            message : "Invalid email-id format!"
-        },
-        invalidContactException : {
-            exceptionCode : "SGR-003",
-            message : "Invalid contact number!"
-        },
-        weakPasswordException : {
-            exceptionCode : "SGR-004",
-            message : "Weak password!"
-        }
+    returnCodes :{
+        CREATE_SUCCESS: 201,
+        BAD_REQUEST: 400,
+        UNAUTHORIZED: 401,
+        FORBIDDEN: 403,
+        UNPROCESSABLE_ENTITY : 422,
+        INTERNAL_SERVER_ERROR : 500
+
     },
     customerSignupSuccess: {
-        status : 201,
         message : "CUSTOMER SUCCESSFULLY REGISTERED"
     }
 }

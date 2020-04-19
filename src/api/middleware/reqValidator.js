@@ -18,12 +18,13 @@ const validateObjectSchema = (data, schema) => {
   const validateBody = (schema) => {
 
     return (req, res, next) => {
-      let response = { ...responses.responseDetails.defaultResponse };
+      let response = { };
+      let returnCode;
       const error = validateObjectSchema(req.body, schema);
       if (error) {
-        response.body = error;
-        response.message = responses.responseDetails.invalidRequestSchemaResponse.BAD_REQUEST;
-        return res.status(response.status).send(response);
+        response.message = responses.responseDetails.invalidRequestSchemaResponse.BAD_REQUEST_MESSAGE;
+        returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
+        return res.status(returnCode).send(response);
       }
   
       return next();
