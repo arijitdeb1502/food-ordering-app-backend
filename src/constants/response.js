@@ -1,7 +1,7 @@
 const responseDetails = {    
-    invalidRequestSchemaResponse : {
-        BAD_REQUEST_MESSAGE : "Invalid input request schema!!"
-    },
+    // invalidRequestSchemaResponse : {
+    //     BAD_REQUEST_MESSAGE : "Invalid input request schema!!"
+    // },
     returnCodes :{
         CREATE_SUCCESS: 201,
         BAD_REQUEST: 400,

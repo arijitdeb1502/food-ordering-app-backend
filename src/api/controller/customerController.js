@@ -12,6 +12,7 @@ const signup = async (req,res) =>{
     res.setHeader('request-id',request_id);
 
     try{
+
         const responseFromService = await customerService.signup({
                                                                     ...req.body,
                                                                     request_id   
@@ -29,7 +30,7 @@ const signup = async (req,res) =>{
         
         response.message = error.message;
 
-        if ( response.message.includes("SGR-001") ) {
+        if ( response.message.includes("SGR-001")|| response.message.includes("SGR-002")) {
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
         } 
 
