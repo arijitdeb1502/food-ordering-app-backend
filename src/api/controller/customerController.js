@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 const responses = require('../../constants/response');
 const customerService = require('../../service/customerService');
 const SignUpRestrictedException = require('../../errors/SignUpRestrictedException');
@@ -6,10 +8,16 @@ const signup = async (req,res) =>{
     
     let response={  };
     let returnCode;
-    
-    try{
+    const request_id=uuid.v4();
+    res.setHeader('request-id',request_id);
 
-        const responseFromService = await customerService.signup(req.body);
+    try{
+        const responseFromService = await customerService.signup({
+                                                                    ...req.body,
+                                                                    request_id   
+                                                                  });
+
+        res.setHeader('location','customer model')
         response.id=responseFromService.id;
         response.status=responses.responseDetails.customerSignupSuccess.message;
         returnCode=responses.responseDetails.returnCodes.CREATE_SUCCESS;
@@ -20,10 +28,10 @@ const signup = async (req,res) =>{
         console.log('Something went wrong: customerController: signup', error);
         
         response.message = error.message;
-        
-        if ( response.message.includes("SGR-001")) {
+
+        if ( response.message.includes("SGR-001") ) {
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-        }
+        } 
 
     }
 

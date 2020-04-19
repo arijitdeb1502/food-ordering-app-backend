@@ -9,6 +9,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.7",
+    "uuid": "^7.0.3",
     "validator": "^13.0.0"
   },
   "devDependencies": {
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "dev": "env-cmd  -f ./config/dev.env nodemon src/server.js"
-   },
+  },
   "author": "",
   "license": "ISC"
 }

@@ -1,8 +1,7 @@
 const Customer = require('../db/model/customer');
-// const responses = require('../constants/response');
 const SignUpRestrictedException = require('../errors/SignUpRestrictedException');
 
-const signup = async ({ first_name, last_name , email_address , contact_number, password }) => {
+const signup = async ({ request_id,first_name, last_name , email_address , contact_number, password }) => {
     try {
         
       const customer = await Customer.findOne({ contact_number });
@@ -10,7 +9,7 @@ const signup = async ({ first_name, last_name , email_address , contact_number, 
           throw new SignUpRestrictedException('SGR-001', 'This contact number is already registered! Try other contact number.');
       }
       
-      const newCustomer = new Customer({ first_name, last_name , email_address , contact_number,password });
+      const newCustomer = new Customer({  request_id, first_name, last_name , email_address , contact_number,password });
       let result = await newCustomer.save();
       return result.toObject();
       
@@ -23,12 +22,11 @@ const signup = async ({ first_name, last_name , email_address , contact_number, 
   const findCustomerByPhoneNumber = async(contact_number)=>{
 
     try {
-      const customer = await Customer.findOne({ contact_number });
+      const customer = await Customer.findByContact(contact_number);
+      return customer;
     }catch(error) {
       console.log('Something went wrong: customerService: findCustomerByPhoneNumber', error);
     }
-
-    return customer;
   }
 
   module.exports = {

@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
-const responses = require('../../constants/response')
+const responses = require('../../constants/response');
+const SignupRestrictedException=require('../../errors/SignUpRestrictedException');
 
 const customerSchema = new mongoose.Schema({
+    request_id : {
+        type: String,
+        required:true
+    },
     first_name : {
         type: String,
         required: true,
@@ -21,9 +26,7 @@ const customerSchema = new mongoose.Schema({
         lowercase: true,
         validate(value) {
             if (!validator.isEmail(value)) {
-                let messageCode=responses.responseDetails.customerSignupExceptions.invalidEmailException.exceptionCode;
-                let messageText=responses.responseDetails.customerSignupExceptions.invalidEmailException.message;
-                throw new Error(`${messageCode}:${messageText}`);
+                throw new SignupRestrictedException('SGR-002','Invalid email-id format!');
             }
         }
     },
@@ -55,6 +58,7 @@ const customerSchema = new mongoose.Schema({
     toObject: {
         transform: function (doc, ret, options) {
           ret.id = ret._id;
+          delete ret.request_id;
           delete ret._id;
           delete ret.first_name;
           delete ret.last_name;
@@ -66,6 +70,19 @@ const customerSchema = new mongoose.Schema({
         }
       }
 });
+
+
+customerSchema.statics.findByContact = async (contact_number) =>{
+    
+    const customer=await Customer.findOne({contact_number});
+    
+    if (!customer) {
+        throw new Error(`Customer with ${contact_number} not found`);
+    }
+    
+    return customer;
+
+}
 
 
 // Hash the plain text password before saving
