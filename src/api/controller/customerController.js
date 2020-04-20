@@ -31,7 +31,7 @@ const signup = async (req,res) =>{
         response.message = error.message;
 
         if ( response.message.includes("SGR-001")|| response.message.includes("SGR-002")||
-             response.message.includes("SGR-003") ) {
+             response.message.includes("SGR-003")||response.message.includes("SGR-004")) {
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
         } 
 

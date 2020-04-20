@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const passwordValidator = require('password-validator');
 
 const responses = require('../../constants/response');
 const SignupRestrictedException=require('../../errors/SignUpRestrictedException');
@@ -45,11 +46,20 @@ const customerSchema = new mongoose.Schema({
         required: true,
         trim: true,
         validate(value) {
-            if(value.length<8){
-                let messageCode=responses.responseDetails.customerSignupExceptions.weakPasswordException.exceptionCode;
-                let messageText=responses.responseDetails.customerSignupExceptions.weakPasswordException.message;
-                throw new Error(`${messageCode}:${messageText}`);
+
+            const schema = new passwordValidator();
+            const regex = /[#@$%&*!^]/g;
+
+            schema
+            .is().min(8)
+            .has().digits()
+            .has().uppercase()
+            .has(regex)
+
+            if(!schema.validate(value)) {
+                throw new SignupRestrictedException('SGR-004','Weak password!');
             }
+
         }
     }
 },{
