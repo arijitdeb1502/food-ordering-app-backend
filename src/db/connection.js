@@ -9,7 +9,6 @@ module.exports = async () => {
               useFindAndModify: false
           }
       );
-      console.log('Database Connected');
     } catch (error) {
       console.log('Database Connectivity Error', error);
       throw new Error(error);
