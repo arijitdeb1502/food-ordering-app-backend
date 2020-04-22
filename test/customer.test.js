@@ -1,4 +1,6 @@
 const request = require('supertest');
+const bcrypt = require('bcryptjs');
+
 const app = require('../src/app');
 const customerService = require('../src/service/customerService')
 
@@ -26,33 +28,22 @@ test('Testing the customer/signup endpoint,SUCCESS Scenario1',async()=>{
     expect(responseIdValue).not.toBe(null);
     expect(responseStatusMessage).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
 
-    // let customer = await Customer.find( {
-    //     contact_number: customerSuccessAllFlds.contact_number
-    // });
+    let customer = await Customer.find( {
+        contact_number: customerSuccessAllFlds.contact_number
+    });
 
-    let customer = await customerService.findCustomerByPhoneNumber(customerSuccessAllFlds.contact_number);
+    // console.log(customer);
+
+    expect(customer).not.toBe(null);
+    expect(customer.length).toBe(1);
     
-    console.log(customer);
+    expect(customer[0].first_name).toBe(customerSuccessAllFlds.first_name);
+    expect(customer[0].last_name).toBe(customerSuccessAllFlds.last_name);
+    expect(customer[0].email_address).toBe(customerSuccessAllFlds.email_address);
+    expect(customer[0].contact_number).toBe(customerSuccessAllFlds.contact_number);
 
-    // expect(customer).not.toBe(null);
-    // expect(customer.length).toBe(1);
+    const isMatch=await bcrypt.compare(customerSuccessAllFlds.password,customer[0].password);
+    console.log(isMatch);
+    // expect(isMatch).toBe(true);
 
-    // customer = await Customer.find( {
-    //     first_name: customerSuccessAllFlds.first_name
-    // });
-
-    // expect(customer).not.toBe(null);
-    // expect(customer.length).toBe(1);
-
-    // expect(customer[0].first_name).toBe("Arijit");
-    // expect(customer[0].last_name).toBe("Deb");
-    // expect(customer[0].email_address).toBe("arijithere@gmail.com");
-    // expect(customer[0].contact_number).toBe("6598581111");
-    // expect(customer[0].password).toBe("aBhiTithi1@3");
-
-
-
-    //5e9f7fffe6c32c47347a072bARARARARARARARARARAR
-    //console.log(response.status);
-    //console.log(JSON.parse(response.text).status+"ARARARARARARARARARAR");
 })
