@@ -62,23 +62,27 @@ const customerSchema = new mongoose.Schema({
 
         }
     }
-},{
-    toObject: {
-        transform: function (doc, ret, options) {
-          ret.id = ret._id;
-          delete ret.request_id;
-          delete ret._id;
-          delete ret.first_name;
-          delete ret.last_name;
-          delete ret.email_address;
-          delete ret.contact_number;
-          delete ret.password;
-          delete ret.__v;
-          return ret;
-        }
-      }
 });
 
+customerSchema.methods.getCustomerSignUpResponse = function(){
+    
+    const customer=this;
+    const customerObject = customer.toObject();
+    const ret = {};
+
+    ret.id=customerObject._id;
+    delete ret.request_id;
+    delete ret._id;
+    delete ret.first_name;
+    delete ret.last_name;
+    delete ret.email_address;
+    delete ret.contact_number;
+    delete ret.password;
+    delete ret.__v;
+
+    return ret;
+
+}
 
 customerSchema.statics.findByContact = async (contact_number) =>{
     

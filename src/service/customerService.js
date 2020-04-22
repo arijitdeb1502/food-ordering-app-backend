@@ -11,7 +11,7 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
       
       const newCustomer = new Customer({  request_id, first_name, last_name , email_address , contact_number,password });
       let result = await newCustomer.save();
-      return result.toObject();
+      return result.getCustomerSignUpResponse();
       
     } catch (error) {
       console.log('Something went wrong: customerService: signup', error);

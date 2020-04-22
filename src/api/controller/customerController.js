@@ -17,7 +17,6 @@ const signup = async (req,res) =>{
                                                                     ...req.body,
                                                                     request_id   
                                                                   });
-
         res.setHeader('location','customer model')
         response.id=responseFromService.id;
         response.status=responses.responseDetails.customerSignupSuccess.message;
