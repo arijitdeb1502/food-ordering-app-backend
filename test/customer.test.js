@@ -8,7 +8,8 @@ const Customer = require('../src/db/model/customer');
 
 const {  
          customerSuccessAllFlds,
-         customerSuccessNoLastName
+         customerSuccessNoLastName,
+         customerFailureNoFirstName
       } = require('./fixtures/customerData');
 
 
@@ -75,3 +76,25 @@ test('Testing the customer/signup endpoint,SUCCESS Scenario2',async()=>{
     expect(passwordIsMatch).toBe(true);    
 
 })
+
+
+test('Testing the customer/signup endpoint,FAILURE Scenario1',async()=>{
+  
+    const response=await request(app).post('/api/customer/signup').send({
+        ...customerFailureNoFirstName
+    }).expect(400);
+
+     const responseStatusMessage = JSON.stringify(response.text);
+
+    expect(responseStatusMessage).toBe("\"{\\\"message\\\":\\\"SGR-005:Except last name all fields should be filled with proper values\\\"}\"");
+
+    let customer = await Customer.find( {
+        contact_number: customerFailureNoFirstName.contact_number
+    });
+
+    expect(customer[0]).toBe(undefined);
+    expect(customer.length).toBe(0);
+
+    
+})
+

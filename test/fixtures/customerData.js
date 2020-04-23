@@ -14,7 +14,16 @@ const customerSuccessNoLastName = {
     password : "aBhiTithi1@3"
 }
 
+const customerFailureNoFirstName = {
+    first_name : "",
+    last_name : "Mitra",
+    email_address : "taniam@gmail.com",
+    contact_number : "6598583333",
+    password : "aBhihshs1@3"
+}
+
 module.exports= {
     customerSuccessAllFlds,
-    customerSuccessNoLastName
+    customerSuccessNoLastName,
+    customerFailureNoFirstName
 }
