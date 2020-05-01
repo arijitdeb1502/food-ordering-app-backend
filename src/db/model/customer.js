@@ -61,7 +61,12 @@ const customerSchema = new mongoose.Schema({
             }
 
         }
-    }
+    },
+    tokens: [{
+        token: {
+            type: String
+        }
+    }]
 });
 
 customerSchema.methods.getCustomerSignUpResponse = function(){

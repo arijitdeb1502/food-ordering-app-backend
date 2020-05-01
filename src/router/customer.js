@@ -9,5 +9,9 @@ router.post('/signup',
   customerController.signup
 );
 
+router.post('/login',
+  customerController.login
+)
+
 
 module.exports = router;
