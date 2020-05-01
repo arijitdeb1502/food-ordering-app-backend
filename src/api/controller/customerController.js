@@ -44,6 +44,7 @@ const login = async (req,res)=>{
     const authorizationHeaderVal=req.headers.authorization.split(" - ");
     const bufferedCredentials=Buffer.from(authorizationHeaderVal[1],'base64');
     const decodedCredentials=bufferedCredentials.toString();
+    
 
     console.log(decodedCredentials);
 }
