@@ -8,6 +8,8 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "is-base64": "^1.1.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "password-validator": "^5.0.3",
     "uuid": "^7.0.3",

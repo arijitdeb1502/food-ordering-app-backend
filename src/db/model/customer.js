@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const passwordValidator = require('password-validator');
 
 const responses = require('../../constants/response');
 const SignupRestrictedException=require('../../errors/SignUpRestrictedException');
+const AuthenticationFailedException=require('../../errors/AuthenticationFailedException');
 
 const customerSchema = new mongoose.Schema({
     request_id : {
@@ -89,12 +91,28 @@ customerSchema.methods.getCustomerSignUpResponse = function(){
 
 }
 
-customerSchema.statics.findByContact = async (contact_number) =>{
+customerSchema.methods.generateAuthToken = async function () {
+    const customer = this;
+    const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '2 hour' });
+
+    customer.tokens = customer.tokens.concat({ token });
+    await customer.save();
+
+    return token;
+}
+
+customerSchema.statics.findByCredential = async (contact_number,password) =>{
     
     const customer=await Customer.findOne({contact_number});
     
     if (!customer) {
-        throw new Error(`Customer with ${contact_number} not found`);
+        throw new AuthenticationFailedException('ATH-001','This contact number has not been registered!');
+    }
+
+    const isMatch = await bcrypt.compare(password, customer.password);
+
+    if (!isMatch) {
+        throw new AuthenticationFailedException('ATH-002','Invalid Credentials');
     }
     
     return customer;

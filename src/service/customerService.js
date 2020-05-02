@@ -19,17 +19,22 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
     }
   }
 
-  const findCustomerByPhoneNumber = async(contact_number)=>{
+  const login = async(contact_number,password)=>{
 
     try {
-      const customer = await Customer.findByContact(contact_number);
-      return customer;
+      const customer = await Customer.findByCredential(contact_number,password);
+      const token = await customer.generateAuthToken();
+      
+      return { 
+        customer,
+        token
+      };
     }catch(error) {
-      console.log('Something went wrong: customerService: findCustomerByPhoneNumber', error);
+      console.log('Something went wrong: customerService: findCustomerByCredential', error);
     }
   }
 
   module.exports = {
       signup: signup,
-      findCustomerByPhoneNumber: findCustomerByPhoneNumber
+      login: login
   }

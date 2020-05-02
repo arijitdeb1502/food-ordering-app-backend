@@ -41,13 +41,37 @@ const signup = async (req,res) =>{
 
 
 const login = async (req,res)=>{
-    const authorizationHeaderVal=req.headers.authorization.split(" - ");
-    const bufferedCredentials=Buffer.from(authorizationHeaderVal[1],'base64');
-    const decodedCredentials=bufferedCredentials.toString();
+   
+    let response={  };
+    let returnCode;
+    
+    try {
+        
+        const responseFromLoginService = await customerService.login(req.headers.decoded_contact_number,req.headers.decoded_password);
+        res.setHeader('request-id',responseFromLoginService.customer.request_id);
+        res.setHeader('access-token',responseFromLoginService.token);
+        response.id=responseFromLoginService.customer._id;
+        response.first_name=responseFromLoginService.customer.first_name;
+        response.last_name=responseFromLoginService.customer.last_name;
+        response.email_address=responseFromLoginService.customer.email_address;
+        response.contact_number=responseFromLoginService.customer.contact_number;
+
+        returnCode=responses.responseDetails.returnCodes.AUTHENTICATION_SUCCESS;
+
+    }catch(error){
+
+        console.log('Something went wrong: customerController: login', error);
+        response.message = error.message;
+        if ( response.message.includes("ATH-001")|| response.message.includes("ATH-004")) {
+            returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+        }
+   }
+   
+   return res.status(returnCode).send(response);
+
+}
     
 
-    console.log(decodedCredentials);
-}
 
 module.exports = {
     signup: signup,
