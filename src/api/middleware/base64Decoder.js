@@ -45,14 +45,9 @@ const decode = ()=>{
             }
 
             return res.status(returnCode).send(response);
-
-        }
         
-        
+        }   
     }
-
-    
-
 }
 
 module.exports = {

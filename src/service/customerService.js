@@ -30,11 +30,25 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
         token
       };
     }catch(error) {
-      console.log('Something went wrong: customerService: findCustomerByCredential', error);
+      console.log('Something went wrong: customerService: login', error);
     }
+  }
+
+  const logout = async (customer)=>{
+
+    try{
+      const response=await customer.save();
+
+      return response;
+
+    }catch(error){
+      console.log('Something went wrong: customerService: logout', error);
+    }
+
   }
 
   module.exports = {
       signup: signup,
-      login: login
+      login: login,
+      logout: logout
   }

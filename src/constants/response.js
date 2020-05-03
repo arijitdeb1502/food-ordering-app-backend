@@ -14,6 +14,9 @@ const responseDetails = {
     },
     customerSignupSuccess: {
         message : "CUSTOMER SUCCESSFULLY REGISTERED"
+    },
+    customerLogoutSuccess: {
+        message : "Logged out successfully"
     }
 }
 

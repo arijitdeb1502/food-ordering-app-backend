@@ -2,7 +2,6 @@ const uuid = require('uuid');
 
 const responses = require('../../constants/response');
 const customerService = require('../../service/customerService');
-const SignUpRestrictedException = require('../../errors/SignUpRestrictedException');
 
 const signup = async (req,res) =>{
     
@@ -70,10 +69,39 @@ const login = async (req,res)=>{
    return res.status(returnCode).send(response);
 
 }
+
+
+const logout = async (req,res) => {
+
+    let response={  };
+    let returnCode;
+
+    try {
+            req.customer.tokens = req.customer.tokens.filter((token) => {
+                return token.token !== req.token
+            })
+
+            const responseFromLogoutService=await customerService.logout(req.customer);
+             
+            response.id=responseFromLogoutService._id;
+            response.message=responses.responseDetails.customerLogoutSuccess.message;
+            returnCode=responses.responseDetails.returnCodes.AUTHENTICATION_SUCCESS;
+
+    } catch (error) {
+
+        console.log('Something went wrong: customerController: logout', error);
+        response.message = error.message;
+
+    }
+
+    return res.status(returnCode).send(response);
+
+}
     
 
 
 module.exports = {
     signup: signup,
-    login: login
+    login: login,
+    logout: logout
 }
