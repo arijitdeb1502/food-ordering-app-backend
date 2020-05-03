@@ -11,7 +11,7 @@ const authenticate = ()=>{
 
         try{
 
-            const token = req.headers.authorization.split(' - ')[1];
+            const token = req.headers.authorization;
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             const customer = await Customer.findOne({'tokens.token': token });
 
@@ -29,13 +29,13 @@ const authenticate = ()=>{
 
             console.log('Something went wrong: auth: authenticate', error);
             
-            response.message = error.message;
+            response.error = "Please authenticate.";
 
-            if ( response.message.includes("ATHR-001")||response.message.includes("jwt")){
+            if ( error.message.includes("ATHR-001")||error.message.includes("jwt")){
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
 
-            res.status(returnCode).send({ error: 'Please authenticate.' });
+            res.status(returnCode).send(response);
         }
     }
 }

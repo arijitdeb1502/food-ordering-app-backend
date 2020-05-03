@@ -54,200 +54,200 @@ test('Testing the customer/signup endpoint,SUCCESS Scenario1',async()=>{
 })
 
 
-test('Testing the customer/signup endpoint,SUCCESS Scenario2',async()=>{
+// test('Testing the customer/signup endpoint,SUCCESS Scenario2',async()=>{
   
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerSuccessNoLastName
-    }).expect(201);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerSuccessNoLastName
+//     }).expect(201);
 
-    const responseStatusMessage = JSON.parse(response.text).status;
-    const responseIdValue = JSON.parse(response.text).id;
+//     const responseStatusMessage = JSON.parse(response.text).status;
+//     const responseIdValue = JSON.parse(response.text).id;
 
-    expect(responseIdValue).not.toBe(null);
-    expect(responseStatusMessage).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
+//     expect(responseIdValue).not.toBe(null);
+//     expect(responseStatusMessage).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
 
-    let customer = await Customer.find( {
-        contact_number: customerSuccessNoLastName.contact_number
-    });
+//     let customer = await Customer.find( {
+//         contact_number: customerSuccessNoLastName.contact_number
+//     });
 
-    expect(customer).not.toBe(null);
-    expect(customer.length).toBe(1);
+//     expect(customer).not.toBe(null);
+//     expect(customer.length).toBe(1);
 
-    const passwordIsMatch=await bcrypt.compare(customerSuccessNoLastName.password,customer[0].password);
+//     const passwordIsMatch=await bcrypt.compare(customerSuccessNoLastName.password,customer[0].password);
 
-    expect(customer[0].first_name).toBe(customerSuccessNoLastName.first_name);
-    expect(customer[0].last_name).toBe(customerSuccessNoLastName.last_name);
-    expect(customer[0].email_address).toBe(customerSuccessNoLastName.email_address);
-    expect(customer[0].contact_number).toBe(customerSuccessNoLastName.contact_number);
-    expect(passwordIsMatch).toBe(true);    
+//     expect(customer[0].first_name).toBe(customerSuccessNoLastName.first_name);
+//     expect(customer[0].last_name).toBe(customerSuccessNoLastName.last_name);
+//     expect(customer[0].email_address).toBe(customerSuccessNoLastName.email_address);
+//     expect(customer[0].contact_number).toBe(customerSuccessNoLastName.contact_number);
+//     expect(passwordIsMatch).toBe(true);    
 
-})
+// })
 
 
-test('Testing the customer/signup endpoint,FAILURE Scenario1',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario1',async()=>{
   
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerFailureNoFirstName
-    }).expect(400);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerFailureNoFirstName
+//     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.text);
+//     const responseStatusMessage = JSON.stringify(response.text);
 
-    expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
+//     expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
 
-    let customer = await Customer.find( {
-        contact_number: customerFailureNoFirstName.contact_number
-    });
+//     let customer = await Customer.find( {
+//         contact_number: customerFailureNoFirstName.contact_number
+//     });
 
-    expect(customer[0]).toBe(undefined);
-    expect(customer.length).toBe(0);
+//     expect(customer[0]).toBe(undefined);
+//     expect(customer.length).toBe(0);
 
     
-})
+// })
 
 
-test('Testing the customer/signup endpoint,FAILURE Scenario2',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario2',async()=>{
   
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerFailureNoEmailAddress
-    }).expect(400);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerFailureNoEmailAddress
+//     }).expect(400);
 
-     const responseStatusMessage = JSON.stringify(response.text);
+//      const responseStatusMessage = JSON.stringify(response.text);
       
-    expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
+//     expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
 
-    let customer = await Customer.find( {
-       contact_number: customerFailureNoEmailAddress.contact_number
-    });
+//     let customer = await Customer.find( {
+//        contact_number: customerFailureNoEmailAddress.contact_number
+//     });
 
-    expect(customer[0]).toBe(undefined);
-    expect(customer.length).toBe(0);
+//     expect(customer[0]).toBe(undefined);
+//     expect(customer.length).toBe(0);
     
-})
+// })
 
 
-test('Testing the customer/signup endpoint,FAILURE Scenario3',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario3',async()=>{
   
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerFailureNoContact
-    }).expect(400);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerFailureNoContact
+//     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.text);
+//     const responseStatusMessage = JSON.stringify(response.text);
       
-    expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
+//     expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
 
-    let customer = await Customer.find( {
-       contact_number: customerFailureNoContact.contact_number
-    });
+//     let customer = await Customer.find( {
+//        contact_number: customerFailureNoContact.contact_number
+//     });
 
-    expect(customer[0]).toBe(undefined);
-    expect(customer.length).toBe(0);
+//     expect(customer[0]).toBe(undefined);
+//     expect(customer.length).toBe(0);
     
-})
+// })
 
 
-test('Testing the customer/signup endpoint,FAILURE Scenario4',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario4',async()=>{
   
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerFailureNoPassword
-    }).expect(400);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerFailureNoPassword
+//     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.text);
+//     const responseStatusMessage = JSON.stringify(response.text);
       
-    expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
+//     expect(responseStatusMessage.includes("SGR-005:Except last name all fields should be filled with proper values")).toBe(true);
 
-    let customer = await Customer.find( {
-       contact_number: customerFailureNoPassword.contact_number
-    });
+//     let customer = await Customer.find( {
+//        contact_number: customerFailureNoPassword.contact_number
+//     });
 
-    expect(customer[0]).toBe(undefined);
-    expect(customer.length).toBe(0);
+//     expect(customer[0]).toBe(undefined);
+//     expect(customer.length).toBe(0);
 
-})
+// })
 
-test('Testing the customer/signup endpoint,FAILURE Scenario5',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario5',async()=>{
   
-    await request(app).post('/api/customer/signup').send({
-        ...customerDuplicateFailure
-    })
+//     await request(app).post('/api/customer/signup').send({
+//         ...customerDuplicateFailure
+//     })
 
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerDuplicateFailure
-    }).expect(422);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerDuplicateFailure
+//     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response);
-    expect(responseStatusMessage.includes("SGR-001:This contact number is already registered! Try other contact number.")).toBe(true);
+//     const responseStatusMessage = JSON.stringify(response);
+//     expect(responseStatusMessage.includes("SGR-001:This contact number is already registered! Try other contact number.")).toBe(true);
 
-})
+// })
 
-test('Testing the customer/signup endpoint,FAILURE Scenario6',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario6',async()=>{
 
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerInvalidEmailId
-    }).expect(422);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerInvalidEmailId
+//     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response);
-    expect(responseStatusMessage.includes("SGR-002:Invalid email-id format!")).toBe(true);
+//     const responseStatusMessage = JSON.stringify(response);
+//     expect(responseStatusMessage.includes("SGR-002:Invalid email-id format!")).toBe(true);
 
-    let customer = await Customer.find( {
-        contact_number: customerInvalidEmailId.contact_number
-     });
+//     let customer = await Customer.find( {
+//         contact_number: customerInvalidEmailId.contact_number
+//      });
  
-     expect(customer[0]).toBe(undefined);
-     expect(customer.length).toBe(0);
+//      expect(customer[0]).toBe(undefined);
+//      expect(customer.length).toBe(0);
 
-})
+// })
 
-test('Testing the customer/signup endpoint,FAILURE Scenario7',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario7',async()=>{
 
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerInvalidEmailId
-    }).expect(422);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerInvalidEmailId
+//     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response);
-    expect(responseStatusMessage.includes("SGR-002:Invalid email-id format!")).toBe(true);
+//     const responseStatusMessage = JSON.stringify(response);
+//     expect(responseStatusMessage.includes("SGR-002:Invalid email-id format!")).toBe(true);
 
-    let customer = await Customer.find( {
-        contact_number: customerInvalidEmailId.contact_number
-     });
+//     let customer = await Customer.find( {
+//         contact_number: customerInvalidEmailId.contact_number
+//      });
  
-     expect(customer[0]).toBe(undefined);
-     expect(customer.length).toBe(0);
+//      expect(customer[0]).toBe(undefined);
+//      expect(customer.length).toBe(0);
 
-})
+// })
 
-test('Testing the customer/signup endpoint,FAILURE Scenario8',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario8',async()=>{
 
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerInvalidContactNumber
-    }).expect(422);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerInvalidContactNumber
+//     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response);
-    expect(responseStatusMessage.includes("SGR-003:Invalid contact number!")).toBe(true);
+//     const responseStatusMessage = JSON.stringify(response);
+//     expect(responseStatusMessage.includes("SGR-003:Invalid contact number!")).toBe(true);
 
-    let customer = await Customer.find( {
-        contact_number: customerInvalidContactNumber.contact_number
-     });
+//     let customer = await Customer.find( {
+//         contact_number: customerInvalidContactNumber.contact_number
+//      });
  
-     expect(customer[0]).toBe(undefined);
-     expect(customer.length).toBe(0);
+//      expect(customer[0]).toBe(undefined);
+//      expect(customer.length).toBe(0);
 
-})
+// })
 
-test('Testing the customer/signup endpoint,FAILURE Scenario9',async()=>{
+// test('Testing the customer/signup endpoint,FAILURE Scenario9',async()=>{
 
-    const response=await request(app).post('/api/customer/signup').send({
-        ...customerWeakPassword
-    }).expect(422);
+//     const response=await request(app).post('/api/customer/signup').send({
+//         ...customerWeakPassword
+//     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response);
-    expect(responseStatusMessage.includes("SGR-004:Weak password!")).toBe(true);
+//     const responseStatusMessage = JSON.stringify(response);
+//     expect(responseStatusMessage.includes("SGR-004:Weak password!")).toBe(true);
 
-    let customer = await Customer.find( {
-        contact_number: customerWeakPassword.contact_number
-     });
+//     let customer = await Customer.find( {
+//         contact_number: customerWeakPassword.contact_number
+//      });
  
-     expect(customer[0]).toBe(undefined);
-     expect(customer.length).toBe(0);
+//      expect(customer[0]).toBe(undefined);
+//      expect(customer.length).toBe(0);
 
-})
+// })
 

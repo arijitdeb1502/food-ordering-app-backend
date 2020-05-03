@@ -13,13 +13,13 @@ const decode = ()=>{
 
         try {
 
-            const authorizationHeaderVal=req.headers.authorization.split(" - ");
+            const authorizationHeaderVal=req.headers.authorization;
 
-            if(!isBase64(authorizationHeaderVal[1])){
+            if(!isBase64(authorizationHeaderVal)){
                 throw new AuthenticationFailedException('ATH-003','Incorrect format of decoded customer name and password');
             }
 
-            const bufferedCredentials=Buffer.from(authorizationHeaderVal[1],'base64');
+            const bufferedCredentials=Buffer.from(authorizationHeaderVal,'base64');
             const decodedCredentials=bufferedCredentials.toString();
             const contact_number=decodedCredentials.split(":")[0];
             const password=decodedCredentials.split(":")[1];

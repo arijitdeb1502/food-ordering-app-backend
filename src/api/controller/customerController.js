@@ -26,10 +26,11 @@ const signup = async (req,res) =>{
         
         console.log('Something went wrong: customerController: signup', error);
         
-        response.message = error.message;
+        response.error = error.message;
 
-        if ( response.message.includes("SGR-001")|| response.message.includes("SGR-002")||
-             response.message.includes("SGR-003")||response.message.includes("SGR-004")) {
+        if ( error.message.includes("SGR-001")||error.message.includes("SGR-002")||
+             error.message.includes("SGR-003")||error.message.includes("SGR-004")) {
+            response.error = "request was well-formed but server unable to process due to semantic errors";
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
         } 
 
@@ -60,8 +61,9 @@ const login = async (req,res)=>{
     }catch(error){
 
         console.log('Something went wrong: customerController: login', error);
-        response.message = error.message;
-        if ( response.message.includes("ATH-001")|| response.message.includes("ATH-004")) {
+        response.error = error.message;
+        if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")) {
+            response.error = "customer has provided wrong credentials";
             returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
         }
    }
@@ -90,7 +92,7 @@ const logout = async (req,res) => {
     } catch (error) {
 
         console.log('Something went wrong: customerController: logout', error);
-        response.message = error.message;
+        response.error = error.message;
 
     }
 

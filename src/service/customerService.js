@@ -1,5 +1,7 @@
 const Customer = require('../db/model/customer');
 const SignUpRestrictedException = require('../errors/SignUpRestrictedException');
+const AuthenticationFailedException = require('../errors/AuthenticationFailedException');
+
 
 const signup = async ({ request_id,first_name, last_name , email_address , contact_number, password }) => {
     try {
@@ -23,6 +25,11 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
 
     try {
       const customer = await Customer.findByCredential(contact_number,password);
+
+      if(!customer){
+        throw new AuthenticationFailedException("ATH-001","This contact number has not been registered!");
+      }
+
       const token = await customer.generateAuthToken();
       
       return { 
@@ -31,6 +38,7 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
       };
     }catch(error) {
       console.log('Something went wrong: customerService: login', error);
+      throw new Error(error);
     }
   }
 
@@ -42,7 +50,9 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
       return response;
 
     }catch(error){
+      
       console.log('Something went wrong: customerService: logout', error);
+      throw new Error();
     }
 
   }
