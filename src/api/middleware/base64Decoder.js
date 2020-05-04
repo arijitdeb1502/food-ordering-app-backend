@@ -12,9 +12,7 @@ const decode = ()=>{
         let returnCode;
 
         try {
-
             const authorizationHeaderVal=req.headers.authorization;
-
             if(!isBase64(authorizationHeaderVal)){
                 throw new AuthenticationFailedException('ATH-003','Incorrect format of decoded customer name and password');
             }
