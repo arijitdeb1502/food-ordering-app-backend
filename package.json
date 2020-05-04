@@ -18,7 +18,7 @@
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "jest": "^25.4.0",
-    "jest-html-reporter": "^3.1.0",
+    "jest-html-reporter": "^2.8.0",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2",
     "swagger-ui-express": "^4.1.4",
@@ -30,7 +30,16 @@
     "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Test Report"
+        }
+      ]
+    ]
   },
   "author": "",
   "license": "ISC"
