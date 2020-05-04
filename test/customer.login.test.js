@@ -33,7 +33,7 @@ test('Testing the customer/login endpoint,SUCCESS Scenario1',async()=>{
     expect(response.body.last_name).toBe(customerSuccessAllFlds.last_name);
     expect(response.body.email_address).toBe(customerSuccessAllFlds.email_address);
     expect(response.body.contact_number).toBe(customerSuccessAllFlds.contact_number);
-    // expect(response.body.message).toBe("LOGGED IN SUCCESSFULLY");
+    expect(response.body.message).toBe("LOGGED IN SUCCESSFULLY");
 
     // console.log(response.header);
     
