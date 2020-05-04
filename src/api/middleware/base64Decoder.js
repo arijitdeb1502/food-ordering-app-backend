@@ -38,9 +38,9 @@ const decode = ()=>{
 
             console.log('Something went wrong: base64decoder: decode', error);
 
-            response.message = error.message;
+            response.error = "Invalid request! Authorization header is either not encoded properly or imporoper value provided";
 
-            if ( response.message.includes("ATH-003")||response.message.includes("ATH-004")){
+            if ( error.message.includes("ATH-003")||error.message.includes("ATH-004")){
                 returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
             }
 

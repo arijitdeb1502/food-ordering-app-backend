@@ -51,6 +51,7 @@ const login = async (req,res)=>{
         res.setHeader('request-id',responseFromLoginService.customer.request_id);
         res.setHeader('access-token',responseFromLoginService.token);
         response.id=responseFromLoginService.customer._id;
+        response.message="LOGGED IN SUCCESSFULLY";
         response.first_name=responseFromLoginService.customer.first_name;
         response.last_name=responseFromLoginService.customer.last_name;
         response.email_address=responseFromLoginService.customer.email_address;
@@ -63,7 +64,7 @@ const login = async (req,res)=>{
         console.log('Something went wrong: customerController: login', error);
         response.error = error.message;
         if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")) {
-            response.error = "customer has provided wrong credentials";
+            response.error = "Either customer is not registered or has provided incorrect credentials";
             returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
         }
    }

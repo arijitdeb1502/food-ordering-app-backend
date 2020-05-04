@@ -33,9 +33,9 @@ const validateObjectSchema = (data, schema) => {
 
       }catch(error){
         console.log('Something went wrong: reqValidator: validateBody', error);
-        response.message = error.message;
+        response.error = 'In API request except last name all fields should be filled with proper values';
 
-        if ( response.message.includes("SGR-005")){
+        if ( error.message.includes("SGR-005")){
           returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
         }
 

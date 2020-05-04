@@ -14,75 +14,74 @@ beforeEach(async () => {
     await Customer.deleteMany();
 })
 
-// test('Testing the customer/login endpoint,SUCCESS Scenario1',async()=>{
+test('Testing the customer/login endpoint,SUCCESS Scenario1',async()=>{
 
-//     //First signup the customer
-//     const responseSignup=await request(app).post('/api/customer/signup').send({
-//                 ...customerSuccessAllFlds
-//             }).expect(201);
+    //First signup the customer
+    const responseSignup=await request(app).post('/api/customer/signup').send({
+                ...customerSuccessAllFlds
+            }).expect(201);
 
-//     const response=await request(app)
-//                            .post('/api/customer/login')
-//                            .set('authorization',base64EncodedCredentials)
-//                            .send().expect(200);
+    const response=await request(app)
+                           .post('/api/customer/login')
+                           .set('authorization',base64EncodedCredentials)
+                           .send().expect(200);
 
-//     //console.log(response);
+    console.log(response.body);
 
-//     expect(response.body.id).not.toBe(null);
-//     expect(response.body.first_name).toBe(customerSuccessAllFlds.first_name);
-//     expect(response.body.last_name).toBe(customerSuccessAllFlds.last_name);
-//     expect(response.body.email_address).toBe(customerSuccessAllFlds.email_address);
-//     expect(response.body.contact_number).toBe(customerSuccessAllFlds.contact_number);
+    expect(response.body.id).not.toBe(null);
+    expect(response.body.first_name).toBe(customerSuccessAllFlds.first_name);
+    expect(response.body.last_name).toBe(customerSuccessAllFlds.last_name);
+    expect(response.body.email_address).toBe(customerSuccessAllFlds.email_address);
+    expect(response.body.contact_number).toBe(customerSuccessAllFlds.contact_number);
+    // expect(response.body.message).toBe("LOGGED IN SUCCESSFULLY");
 
-//     // console.log(response.header);
+    // console.log(response.header);
     
-//     const decoded = jwt.verify(response.header["access-token"], process.env.JWT_SECRET);
-//     // console.log(decoded);
+    const decoded = jwt.verify(response.header["access-token"], process.env.JWT_SECRET);
+    // console.log(decoded);
 
-//     expect(decoded._id).not.toBe(null);
-//     expect(decoded.iat).not.toBe(null);
-//     expect(decoded.exp).not.toBe(null);
+    expect(decoded._id).not.toBe(null);
+    expect(decoded.iat).not.toBe(null);
+    expect(decoded.exp).not.toBe(null);
     
     
-// })
+})
 
 
-// test('Testing the customer/login endpoint,FAILURE Scenario1',async()=>{
+test('Testing the customer/login endpoint,FAILURE Scenario1',async()=>{
 
-//     //First signup the customer
-//     const responseSignup=await request(app).post('/api/customer/signup').send({
-//                 ...customerSuccessAllFlds
-//             }).expect(201);
+    //First signup the customer
+    const responseSignup=await request(app).post('/api/customer/signup').send({
+                ...customerSuccessAllFlds
+            }).expect(201);
 
-//     const response=await request(app)
-//                            .post('/api/customer/login')
-//                            .set('authorization',base64EncodedCredentials+"-------")
-//                            .send().expect(400);
+    const response=await request(app)
+                           .post('/api/customer/login')
+                           .set('authorization',base64EncodedCredentials+"-------")
+                           .send().expect(400);
 
-//     // console.log(response.body.message);
+    // console.log(response.body);
 
-//     expect(response.body.message).toBe("ATH-003:Incorrect format of decoded customer name and password");
+    expect(response.body.error).toBe("Invalid request! Authorization header is either not encoded properly or imporoper value provided");
     
-// })
+})
 
 
-// test('Testing the customer/login endpoint,FAILURE Scenario2',async()=>{
+test('Testing the customer/login endpoint,FAILURE Scenario2',async()=>{
 
-//     //First signup the customer
-//     const responseSignup=await request(app).post('/api/customer/signup').send({
-//                 ...customerSuccessAllFlds
-//             }).expect(201);
+    //First signup the customer
+    const responseSignup=await request(app).post('/api/customer/signup').send({
+                ...customerSuccessAllFlds
+            }).expect(201);
 
-//     const response=await request(app)
-//                            .post('/api/customer/login')
-//                            .set('authorization',base64EncodedCredentialsFailure2)
-//                            .send().expect(400);
+    const response=await request(app)
+                           .post('/api/customer/login')
+                           .set('authorization',base64EncodedCredentialsFailure2)
+                           .send().expect(400);
 
-//     // console.log(response.body.message);
-
-//     expect(response.body.message).toBe("ATH-004:Either or both of phone number and password are not provided");
+    expect(response.body.error).toBe("Invalid request! Authorization header is either not encoded properly or imporoper value provided");
     
-// })
+})
 
 test('Testing the customer/login endpoint,FAILURE Scenario3',async()=>{
 
@@ -96,9 +95,9 @@ test('Testing the customer/login endpoint,FAILURE Scenario3',async()=>{
                            .set('authorization',base64EncodedCredentialsFailure3)
                            .send().expect(401);
 
-    // console.log(response.body.message);
+    // console.log(response.body);
 
-    expect(response.body.message.includes("ATH-001:This contact number has not been registered!")).toBe(true);
+    expect(response.body.error).toBe("Either customer is not registered or has provided incorrect credentials");
     
 })
 
@@ -117,6 +116,6 @@ test('Testing the customer/login endpoint,FAILURE Scenario4',async()=>{
 
     // console.log(response.body.message);
 
-    expect(response.body.message.includes("ATH-001:This contact number has not been registered!")).toBe(true);
+    expect(response.body.error).toBe("Either customer is not registered or has provided incorrect credentials");
     
 })
