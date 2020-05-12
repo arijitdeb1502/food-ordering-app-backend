@@ -13,7 +13,8 @@ router.post('/signup',
 
 router.post('/login',
   base54Decoder.decode(),
-  customerController.login
+  customerController.login(),
+  auth.generateAuthTokenAndRespond
 )
 
 router.post('/logout',

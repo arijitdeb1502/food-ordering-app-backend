@@ -30,11 +30,10 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
         throw new AuthenticationFailedException("ATH-001","This contact number has not been registered!");
       }
 
-      const token = await customer.generateAuthToken();
+      // const token = await customer.generateAuthToken();
       
       return { 
-        customer,
-        token
+        customer
       };
     }catch(error) {
       console.log('Something went wrong: customerService: login', error);
@@ -42,12 +41,16 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
     }
   }
 
-  const logout = async (customer)=>{
+  const logout = async (id)=>{
 
     try{
-      const response=await customer.save();
+      const customer=await Customer.findOne({'_id': id });
 
-      return response;
+      if(!customer){
+            throw new AuthorizationFailedException("ATHR-001","Customer is not Logged in.");
+      }
+
+      return customer;
 
     }catch(error){
       

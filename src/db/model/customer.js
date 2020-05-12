@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const passwordValidator = require('password-validator');
 
 const responses = require('../../constants/response');
@@ -63,12 +63,7 @@ const customerSchema = new mongoose.Schema({
             }
 
         }
-    },
-    tokens: [{
-        token: {
-            type: String
-        }
-    }]
+    }
 });
 
 customerSchema.methods.getCustomerSignUpResponse = function(){
@@ -89,16 +84,6 @@ customerSchema.methods.getCustomerSignUpResponse = function(){
 
     return ret;
 
-}
-
-customerSchema.methods.generateAuthToken = async function () {
-    const customer = this;
-    const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '2 hour' });
-
-    customer.tokens = customer.tokens.concat({ token });
-    await customer.save();
-
-    return token;
 }
 
 customerSchema.statics.findByCredential = async (contact_number,password) =>{

@@ -40,37 +40,36 @@ const signup = async (req,res) =>{
 }
 
 
-const login = async (req,res)=>{
+const login = ()=>{
+
+    return async (req,res,next)=>{
    
-    let response={  };
-    let returnCode;
+        let response={  };
+        let returnCode;
     
-    try {
+        try {
         
-        const responseFromLoginService = await customerService.login(req.headers.decoded_contact_number,req.headers.decoded_password);
-        res.setHeader('request-id',responseFromLoginService.customer.request_id);
-        res.setHeader('access-token',responseFromLoginService.token);
-        response.id=responseFromLoginService.customer._id;
-        response.message="LOGGED IN SUCCESSFULLY";
-        response.first_name=responseFromLoginService.customer.first_name;
-        response.last_name=responseFromLoginService.customer.last_name;
-        response.email_address=responseFromLoginService.customer.email_address;
-        response.contact_number=responseFromLoginService.customer.contact_number;
+            const responseFromLoginService = await customerService.login(req.headers.decoded_contact_number,req.headers.decoded_password);
+            
+            req.customer=responseFromLoginService.customer;
+            req.respMessage="LOGGED IN SUCCESSFULLY";
+            req.returnCode=responses.responseDetails.returnCodes.AUTHENTICATION_SUCCESS;
 
-        returnCode=responses.responseDetails.returnCodes.AUTHENTICATION_SUCCESS;
+            next();
 
-    }catch(error){
+        }catch(error){
 
-        console.log('Something went wrong: customerController: login', error);
-        response.error = error.message;
-        if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")) {
-            response.error = "Either customer is not registered or has provided incorrect credentials";
-            returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            console.log('Something went wrong: customerController: login', error);
+            response.error = error.message;
+            if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")) {
+                response.error = "Either customer is not registered or has provided incorrect credentials";
+                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            }
+
+            res.status(returnCode).send(response);
         }
-   }
-   
-   return res.status(returnCode).send(response);
 
+    }
 }
 
 
@@ -80,11 +79,8 @@ const logout = async (req,res) => {
     let returnCode;
 
     try {
-            req.customer.tokens = req.customer.tokens.filter((token) => {
-                return token.token !== req.token
-            })
-
-            const responseFromLogoutService=await customerService.logout(req.customer);
+        
+            const responseFromLogoutService=await customerService.logout(req.decoded._id);
              
             response.id=responseFromLogoutService._id;
             response.message=responses.responseDetails.customerLogoutSuccess.message;
@@ -94,6 +90,7 @@ const logout = async (req,res) => {
 
         console.log('Something went wrong: customerController: logout', error);
         response.error = error.message;
+        returnCode=500;
 
     }
 
