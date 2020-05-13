@@ -13,13 +13,7 @@ const authenticate = ()=>{
 
             const token = req.headers.authorization;
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            // console.log(JSON.stringify(decoded)+"XXXXXXXXXXXXXXXXXXXXXXXX");
-            // const customer = await Customer.findOne({'_id': decoded._id });
-
-            // if(!customer){
-            //     throw new AuthorizationFailedException("ATHR-001","Customer is not Logged in.");
-            // }
-
+            
             req.decoded=decoded;
 
             return next();

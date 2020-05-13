@@ -90,7 +90,7 @@ const logout = async (req,res) => {
 
         console.log('Something went wrong: customerController: logout', error);
         response.error = error.message;
-        returnCode=500;
+        returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
 
     }
 
