@@ -97,11 +97,16 @@ const logout = async (req,res) => {
     return res.status(returnCode).send(response);
 
 }
+
+const updateCustomer = async (req,res)=>{
+    console.log(req.decoded);
+} 
     
 
 
 module.exports = {
     signup: signup,
     login: login,
-    logout: logout
+    logout: logout,
+    updateCustomer: updateCustomer
 }

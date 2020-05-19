@@ -12,6 +12,7 @@ const authenticate = ()=>{
         try{
 
             const token = req.headers.authorization;
+            console.log(token+"ARARAARAR")
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             
             req.decoded=decoded;
@@ -42,7 +43,7 @@ const generateAuthTokenAndRespond = (req,res)=>{
         let {customer,respMessage} = {...req};
         returnCode=req.returnCode;
         
-        const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '1 minute' });
+        const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 minute' });
     
         res.setHeader('request-id',customer.request_id);
         res.setHeader('access-token',token);

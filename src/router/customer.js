@@ -22,4 +22,10 @@ router.post('/logout',
   customerController.logout
 )
 
+router.put('/',
+  //reqValidator.validateBody(customerSchema.updateCustomerRequest),
+  auth.authenticate(),
+  customerController.updateCustomer
+)
+
 module.exports = router;
