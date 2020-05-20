@@ -89,13 +89,13 @@ customerSchema.methods.getCustomerSignUpResponse = function(){
 customerSchema.statics.findByCredential = async (contact_number,password) =>{
     
     const customer=await Customer.findOne({contact_number});
-    
+
     if (!customer) {
         throw new AuthenticationFailedException('ATH-001','This contact number has not been registered!');
     }
-
+    
     const isMatch = await bcrypt.compare(password, customer.password);
-
+    
     if (!isMatch) {
         throw new AuthenticationFailedException('ATH-002','Invalid Credentials');
     }

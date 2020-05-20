@@ -6,7 +6,7 @@ const customerService = require('../../service/customerService');
 const signup = async (req,res) =>{
     
     let response={  };
-    let returnCode;
+    let returnCode=400;
     const request_id=uuid.v4();
     res.setHeader('request-id',request_id);
 
@@ -45,7 +45,7 @@ const login = ()=>{
     return async (req,res,next)=>{
    
         let response={  };
-        let returnCode;
+        let returnCode=400;
     
         try {
         
@@ -61,7 +61,7 @@ const login = ()=>{
 
             console.log('Something went wrong: customerController: login', error);
             response.error = error.message;
-            if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")) {
+            if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")||error.message.includes("ATH-002")) {
                 response.error = "Either customer is not registered or has provided incorrect credentials";
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
@@ -72,11 +72,10 @@ const login = ()=>{
     }
 }
 
-
 const logout = async (req,res) => {
 
     let response={  };
-    let returnCode;
+    let returnCode=400;
 
     try {
         
@@ -99,7 +98,32 @@ const logout = async (req,res) => {
 }
 
 const updateCustomer = async (req,res)=>{
-    console.log(req.decoded);
+        
+    let response={  };
+    let returnCode=400;
+    
+    const request_id=uuid.v4();
+    res.setHeader('request-id',request_id);
+
+    try{
+        const responseFromService = await customerService.update(request_id,req.decoded._id,req.body);
+        res.setHeader('location','customer model');
+
+        response.id=responseFromService.id;
+        response.status=responses.responseDetails.customerUpdateSuccess.message;
+        returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+    } catch(error){
+        console.log('Something went wrong: customerController: updateCustomer', error);
+        response.error = error.message;
+        if ( error.message.includes("ATH-001")) {
+            response.error = "Either customer is not registered or has logged out";
+            returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+        }
+    }
+
+    return res.status(returnCode).send(response);
+
 } 
     
 

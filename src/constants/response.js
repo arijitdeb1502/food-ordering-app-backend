@@ -9,7 +9,8 @@ const responseDetails = {
         FORBIDDEN: 403,
         UNPROCESSABLE_ENTITY : 422,
         INTERNAL_SERVER_ERROR : 500,
-        AUTHENTICATION_SUCCESS :200
+        AUTHENTICATION_SUCCESS :200,
+        GENERIC_SUCCESS: 200
 
     },
     customerSignupSuccess: {
@@ -17,6 +18,9 @@ const responseDetails = {
     },
     customerLogoutSuccess: {
         message : "Logged out successfully"
+    },
+    customerUpdateSuccess: {
+        message : "USER DETAILS SUCCESSFULLY UPDATED"
     }
 }
 

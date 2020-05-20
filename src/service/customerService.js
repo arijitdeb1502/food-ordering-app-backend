@@ -24,11 +24,12 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
   const login = async(contact_number,password)=>{
 
     try {
+
       const customer = await Customer.findByCredential(contact_number,password);
 
-      if(!customer){
-        throw new AuthenticationFailedException("ATH-001","This contact number has not been registered!");
-      }
+      // if(!customer){
+      //   throw new AuthenticationFailedException("ATH-001","This contact number has not been registered!");
+      // }
 
       // const token = await customer.generateAuthToken();
       
@@ -60,8 +61,36 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
 
   }
 
+  const update = async (request_id,customer_id,updatedFlds)=>{
+
+    try{
+      const customer=await Customer.findOne({'_id': customer_id });
+
+      if(!customer){
+            throw new AuthorizationFailedException("ATHR-001","Customer is not Logged in.");
+      }
+      
+      for(fields in updatedFlds){
+        customer[fields]=updatedFlds[fields];
+      }
+
+      const updatedCustomer = await customer.save();
+
+      return updatedCustomer;
+
+    }catch(error){
+      
+      console.log('Something went wrong: customerService: logout', error);
+      throw new Error();
+    }
+
+
+
+  }
+
   module.exports = {
       signup: signup,
       login: login,
-      logout: logout
+      logout: logout,
+      update: update
   }

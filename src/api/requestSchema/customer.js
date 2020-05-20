@@ -8,7 +8,12 @@ const signupCustomerRequest = Joi.object().keys({
     password : Joi.string().required(),
 })
 
+const updateCustomerRequest = Joi.object().keys({
+    first_name : Joi.string().required(),
+    last_name  : Joi.string().allow("")
+})
 
 module.exports = {
-    signupCustomerRequest: signupCustomerRequest
+    signupCustomerRequest: signupCustomerRequest,
+    updateCustomerRequest: updateCustomerRequest
 }
