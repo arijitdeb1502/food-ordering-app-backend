@@ -92,7 +92,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario1',async()=>{
 
     const responseStatusMessage = JSON.stringify(response.body.error);
 
-    expect(responseStatusMessage.includes("In API request except last name all fields should be filled with proper values")).toBe(true);
+    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
 
     let customer = await Customer.find( {
         contact_number: customerFailureNoFirstName.contact_number
@@ -113,7 +113,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario2',async()=>{
 
     const responseStatusMessage = JSON.stringify(response.body.error);
 
-    expect(responseStatusMessage.includes("In API request except last name all fields should be filled with proper values")).toBe(true);
+    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
 
     let customer = await Customer.find( {
        contact_number: customerFailureNoEmailAddress.contact_number
@@ -133,7 +133,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario3',async()=>{
 
     const responseStatusMessage = JSON.stringify(response.body.error);
 
-    expect(responseStatusMessage.includes("In API request except last name all fields should be filled with proper values")).toBe(true);
+    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
 
     let customer = await Customer.find( {
        contact_number: customerFailureNoContact.contact_number
@@ -153,7 +153,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario4',async()=>{
 
     const responseStatusMessage = JSON.stringify(response.body.error);
 
-    expect(responseStatusMessage.includes("In API request except last name all fields should be filled with proper values")).toBe(true);
+    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
 
     let customer = await Customer.find( {
        contact_number: customerFailureNoPassword.contact_number

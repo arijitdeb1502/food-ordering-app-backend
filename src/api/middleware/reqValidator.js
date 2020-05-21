@@ -1,6 +1,7 @@
 const Joi = require('@hapi/joi');
 const responses = require('../../constants/response');
 const SignUpRestrictedException = require('../../errors/SignUpRestrictedException');
+const UpdateCustomerException = require('../../errors/UpdateCustomerException')
 
 const validateObjectSchema = (data, schema) => {
     const result = schema.validate(data);
@@ -27,15 +28,23 @@ const validateObjectSchema = (data, schema) => {
       try{ 
         const error = validateObjectSchema(req.body, schema);
 
-        if (error) {          
-          throw new SignUpRestrictedException('SGR-005','Except last name all fields should be filled with proper values')
+        if (error) {
+          if(req.originalUrl==="/api/customer/signup" && req.method==="POST") {
+            throw new SignUpRestrictedException('SGR-005','Except last name all fields should be filled with proper values')
+          }else if ((req.originalUrl==="/api/customer") && req.method==="PUT"){
+            throw new UpdateCustomerException('UCR-002','First name field should not be empty');
+          }
         }
 
       }catch(error){
         console.log('Something went wrong: reqValidator: validateBody', error);
-        response.error = 'In API request except last name all fields should be filled with proper values';
+        response.error = 'Invalid request body!';
 
         if ( error.message.includes("SGR-005")){
+          response.error = 'Except last name all fields should be filled with proper values';
+          returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
+        } else if( error.message.includes("UCR-002") ){
+          response.error = 'First name field should not be empty';
           returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
         }
 

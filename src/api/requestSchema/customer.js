@@ -13,7 +13,13 @@ const updateCustomerRequest = Joi.object().keys({
     last_name  : Joi.string().allow("")
 })
 
+const updatePasswordRequest = Joi.object().keys({
+    old_password : Joi.string().required(),
+    new_password  : Joi.string().required()
+})
+
 module.exports = {
     signupCustomerRequest: signupCustomerRequest,
-    updateCustomerRequest: updateCustomerRequest
+    updateCustomerRequest: updateCustomerRequest,
+    updatePasswordRequest: updatePasswordRequest
 }
