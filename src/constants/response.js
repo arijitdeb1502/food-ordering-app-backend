@@ -21,6 +21,9 @@ const responseDetails = {
     },
     customerUpdateSuccess: {
         message : "USER DETAILS SUCCESSFULLY UPDATED"
+    },
+    passwordChangeSuccess: {
+        message : "USER PASSWORD SUCCESSFULLY UPDATED"
     }
 }
 

@@ -105,7 +105,6 @@ const updateCustomer = ()=>{
         let returnCode=400;
     
         const request_id=uuid.v4();
-        // res.setHeader('request-id',request_id);
 
         try{
             const responseFromService = await customerService.update(request_id,req.decoded._id,req.body);
@@ -133,10 +132,51 @@ const updateCustomer = ()=>{
 } 
     
 
+const changePassword= ()=>{
+
+    return async (req,res,next)=>{
+        
+        let response={  };
+        let returnCode=400;
+    
+        const request_id=uuid.v4();
+
+        try{
+            const responseFromService = await customerService.updatePassword(request_id,req.decoded._id,req.body);
+
+            res.setHeader('location','customer model');
+
+            req.id=responseFromService.id;
+            req.request_id=request_id;
+            req.status=responses.responseDetails.passwordChangeSuccess.message;
+            req.returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+            next();
+
+        } catch(error){
+            console.log('Something went wrong: customerController: updateCustomer', error);
+            response.error = error.message;
+
+            if ( error.message.includes("ATH-001")) {
+                response.error = "Either customer is not registered or has logged out";
+                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            }
+            else if(error.message.includes("UCR-004")){
+                response.error = "Old Password provided by the customer does not match";
+                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            }
+
+            res.status(returnCode).send(response);
+        }
+        
+    }
+} 
+
 
 module.exports = {
     signup: signup,
     login: login,
     logout: logout,
-    updateCustomer: updateCustomer
+    updateCustomer: updateCustomer,
+    changePassword: changePassword
 }

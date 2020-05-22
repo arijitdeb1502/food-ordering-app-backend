@@ -29,10 +29,11 @@ router.put('/',
   auth.sendUpdateCustomerResponse
 )
 
-// router.put('/password',
-//   reqValidator.validateBody(customerSchema.updatePasswordRequest),
-//   auth.authenticate(),
-//   customerController.updatePassword
-// )
+router.put('/password',
+  reqValidator.validateBody(customerSchema.updatePasswordRequest),
+  auth.authenticate(),
+  customerController.changePassword(),
+  auth.sendUpdateCustomerResponse
+)
 
 module.exports = router;
