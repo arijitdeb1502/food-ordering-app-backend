@@ -33,19 +33,28 @@ const validateObjectSchema = (data, schema) => {
             throw new SignUpRestrictedException('SGR-005','Except last name all fields should be filled with proper values')
           }else if ((req.originalUrl==="/api/customer") && req.method==="PUT"){
             throw new UpdateCustomerException('UCR-002','First name field should not be empty');
+          }else if((req.originalUrl==="/api/customer/password") && req.method==="PUT"){
+            throw new UpdateCustomerException('UCR-003','No field should be empty');
           }
         }
 
       }catch(error){
         console.log('Something went wrong: reqValidator: validateBody', error);
         response.error = 'Invalid request body!';
+        returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
 
         if ( error.message.includes("SGR-005")){
+
           response.error = 'Except last name all fields should be filled with proper values';
-          returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
+          
         } else if( error.message.includes("UCR-002") ){
+
           response.error = 'First name field should not be empty';
-          returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
+        
+        } else if( error.message.includes("UCR-003") ){
+      
+          response.error = 'Both old and new password must be provided';
+      
         }
 
         return res.status(returnCode).send(response);

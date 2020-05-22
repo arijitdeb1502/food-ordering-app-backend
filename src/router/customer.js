@@ -14,7 +14,7 @@ router.post('/signup',
 router.post('/login',
   base54Decoder.decode(),
   customerController.login(),
-  auth.generateAuthTokenAndRespond
+  auth.sendLoginResponse
 )
 
 router.post('/logout',
@@ -25,7 +25,14 @@ router.post('/logout',
 router.put('/',
   reqValidator.validateBody(customerSchema.updateCustomerRequest),
   auth.authenticate(),
-  customerController.updateCustomer
+  customerController.updateCustomer(),
+  auth.sendUpdateCustomerResponse
 )
+
+// router.put('/password',
+//   reqValidator.validateBody(customerSchema.updatePasswordRequest),
+//   auth.authenticate(),
+//   customerController.updatePassword
+// )
 
 module.exports = router;

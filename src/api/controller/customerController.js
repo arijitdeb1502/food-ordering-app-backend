@@ -97,33 +97,39 @@ const logout = async (req,res) => {
 
 }
 
-const updateCustomer = async (req,res)=>{
+const updateCustomer = ()=>{
+
+    return async (req,res,next)=>{
         
-    let response={  };
-    let returnCode=400;
+        let response={  };
+        let returnCode=400;
     
-    const request_id=uuid.v4();
-    res.setHeader('request-id',request_id);
+        const request_id=uuid.v4();
+        // res.setHeader('request-id',request_id);
 
-    try{
-        const responseFromService = await customerService.update(request_id,req.decoded._id,req.body);
-        res.setHeader('location','customer model');
+        try{
+            const responseFromService = await customerService.update(request_id,req.decoded._id,req.body);
+            res.setHeader('location','customer model');
 
-        response.id=responseFromService.id;
-        response.status=responses.responseDetails.customerUpdateSuccess.message;
-        returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+            req.id=responseFromService.id;
+            req.request_id=request_id;
+            req.status=responses.responseDetails.customerUpdateSuccess.message;
+            req.returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
 
-    } catch(error){
-        console.log('Something went wrong: customerController: updateCustomer', error);
-        response.error = error.message;
-        if ( error.message.includes("ATH-001")) {
-            response.error = "Either customer is not registered or has logged out";
-            returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            next();
+
+        } catch(error){
+            console.log('Something went wrong: customerController: updateCustomer', error);
+            response.error = error.message;
+            if ( error.message.includes("ATH-001")) {
+                response.error = "Either customer is not registered or has logged out";
+                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            }
+
+            res.status(returnCode).send(response);
         }
+        
     }
-
-    return res.status(returnCode).send(response);
-
 } 
     
 
