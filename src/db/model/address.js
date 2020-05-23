@@ -18,7 +18,17 @@ const addressSchema = mongoose.Schema({
         required: true
     },
     state_uuid:{
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'State'
+    },
+    resident:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Customer'
     }
 })
+
+const Address = mongoose.model('Address', addressSchema);
+
+module.exports = Address
