@@ -3,14 +3,14 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
+// const swaggerDocument = YAML.load(__dirname+'/api/endpoints/customer.yaml');
+const swaggerDocument = YAML.load(__dirname+'/api/endpoints/address.yaml');
 
-const swaggerDocument = YAML.load(__dirname+'/api/endpoints/customer.yaml');
 const dbConnection = require('./db/connection');
 
 const customerRouter = require('./router/customer')
 
 const app = express();
-
 // db connectivity
 dbConnection();
 
