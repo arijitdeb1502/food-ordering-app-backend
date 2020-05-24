@@ -11,9 +11,10 @@ const authenticate = ()=>{
 
         try{
 
-            const token = req.headers.authorization;
+            const token = req.headers.authorization.replace('Bearer ', '');
+            console.log(token+"Arijit")
+
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            
             req.decoded=decoded;
 
             return next();

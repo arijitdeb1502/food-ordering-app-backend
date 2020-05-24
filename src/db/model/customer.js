@@ -66,6 +66,12 @@ const customerSchema = new mongoose.Schema({
     }
 });
 
+customerSchema.virtual('addresses', {
+    ref: 'Address',
+    localField: '_id',
+    foreignField: 'resident'
+})
+
 customerSchema.methods.getCustomerSignUpResponse = function(){
     
     const customer=this;

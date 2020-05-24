@@ -3,7 +3,7 @@ info:
   title: Address API
   version: 1.0.0
   description: API of Address Services
-host: FoodOrderingApp.io
+host: localhost:3001
 schemes:
   - http
   - https

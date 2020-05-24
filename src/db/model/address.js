@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const validator = require('validator')
+
 
 const addressSchema = mongoose.Schema({
     flat_building_name: {
@@ -18,9 +20,8 @@ const addressSchema = mongoose.Schema({
         required: true
     },
     state_uuid:{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'State'
+        type: String,
+        required: true
     },
     resident:{
         type: mongoose.Schema.Types.ObjectId,

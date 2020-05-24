@@ -1,7 +1,8 @@
 const Joi = require('@hapi/joi');
 const responses = require('../../constants/response');
 const SignUpRestrictedException = require('../../errors/SignUpRestrictedException');
-const UpdateCustomerException = require('../../errors/UpdateCustomerException')
+const UpdateCustomerException = require('../../errors/UpdateCustomerException');
+const SaveAddressException = require('../../errors/SaveAddressException');
 
 const validateObjectSchema = (data, schema) => {
     const result = schema.validate(data);
@@ -26,8 +27,10 @@ const validateObjectSchema = (data, schema) => {
       let returnCode;
 
       try{ 
-        const error = validateObjectSchema(req.body, schema);
 
+        console.log(req.originalUrl+"Arijit");
+
+        const error = validateObjectSchema(req.body, schema);
         if (error) {
           if(req.originalUrl==="/api/customer/signup" && req.method==="POST") {
             throw new SignUpRestrictedException('SGR-005','Except last name all fields should be filled with proper values')
@@ -35,6 +38,8 @@ const validateObjectSchema = (data, schema) => {
             throw new UpdateCustomerException('UCR-002','First name field should not be empty');
           }else if((req.originalUrl==="/api/customer/password") && req.method==="PUT"){
             throw new UpdateCustomerException('UCR-003','No field should be empty');
+          }else if((req.originalUrl==="/api/address") && req.method==="POST"){
+            throw new SaveAddressException('SAR-001','No field can be empty');
           }
         }
 
@@ -54,6 +59,10 @@ const validateObjectSchema = (data, schema) => {
         } else if( error.message.includes("UCR-003") ){
       
           response.error = 'Both old and new password must be provided';
+      
+        } else if( error.message.includes("SAR-001") ){
+      
+          response.error = 'No field can be empty';
       
         }
 
