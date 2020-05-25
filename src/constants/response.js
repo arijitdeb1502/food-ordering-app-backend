@@ -24,6 +24,9 @@ const responseDetails = {
     },
     passwordChangeSuccess: {
         message : "USER PASSWORD SUCCESSFULLY UPDATED"
+    },
+    addressSaveSuccess: {
+        message : "ADDRESS SUCCESSFULLY SAVED"
     }
 }
 

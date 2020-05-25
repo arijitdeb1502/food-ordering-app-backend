@@ -36,6 +36,7 @@ const customerSchema = new mongoose.Schema({
     contact_number : {
         type: String,
         required: true,
+        unique: true,
         trim: true,
         validate(value) {
             if(value.length!=10){

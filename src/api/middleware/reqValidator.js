@@ -28,8 +28,6 @@ const validateObjectSchema = (data, schema) => {
 
       try{ 
 
-        console.log(req.originalUrl+"Arijit");
-
         const error = validateObjectSchema(req.body, schema);
         if (error) {
           if(req.originalUrl==="/api/customer/signup" && req.method==="POST") {

@@ -12,7 +12,6 @@ const authenticate = ()=>{
         try{
 
             const token = req.headers.authorization.replace('Bearer ', '');
-            console.log(token+"Arijit")
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.decoded=decoded;
@@ -25,12 +24,11 @@ const authenticate = ()=>{
             console.log('Something went wrong: auth: authenticate', error);
             
             response.error = "Please authenticate.";
-
-            if ( error.message.includes("jwt")){
-                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
-            }
+            returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
 
             res.status(returnCode).send(response);
+
+            throw new AuthorizationFailedException("ATHR-001","Customer is not logged in!!");
         }
     }
 }
@@ -43,7 +41,7 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         let {customer,respMessage} = {...req};
         returnCode=req.returnCode;
         
-        const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '55 minute' });
+        const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
         res.setHeader('request-id',customer.request_id);
         res.setHeader('access-token',token);
@@ -78,7 +76,38 @@ const generateAuthTokenAndRespondToUpdateCustomer = (req,res)=>{
         let {id,request_id,status} = {...req};
         returnCode=req.returnCode;
 
-        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '55 minute' });
+        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
+
+        res.setHeader('request-id',request_id);
+        res.setHeader('access-token',token);
+
+        response.id=id;
+        response.status=status;
+    
+    }catch(error){
+
+        returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
+        response.error = "Cannot generate Auth Token and send response!!";
+
+        console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
+        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+
+    }
+
+    res.status(returnCode).send(response);
+
+}
+
+const sendUpdateAddressResponse = (req,res)=>{
+
+    let response={};
+    let returnCode;
+    try{
+
+        let {id,request_id,status} = {...req};
+        returnCode=req.returnCode;
+
+        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
 
         res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
@@ -103,5 +132,6 @@ const generateAuthTokenAndRespondToUpdateCustomer = (req,res)=>{
 module.exports= {
     authenticate: authenticate,
     sendLoginResponse: generateAuthTokenAndRespondToLogin,
-    sendUpdateCustomerResponse: generateAuthTokenAndRespondToUpdateCustomer
+    sendUpdateCustomerResponse: generateAuthTokenAndRespondToUpdateCustomer,
+    sendUpdateAddressResponse: sendUpdateAddressResponse
 }
