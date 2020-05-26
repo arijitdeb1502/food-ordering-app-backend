@@ -17,7 +17,7 @@ const saveAddress = async ({ request_id,flat_building_name,locality, city , pinc
       const address = await Address.findOne({ flat_building_name });
       if (address) {
         throw new SaveAddressException('SAR-003', 'combination of flat and building name must be unique');
-    }
+      }
       
       const newAddress = new Address({  request_id, flat_building_name, locality, city , pincode , state_uuid,resident });
       let result = await newAddress.save();

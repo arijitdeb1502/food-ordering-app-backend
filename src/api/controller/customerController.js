@@ -28,12 +28,19 @@ const signup = async (req,res) =>{
         
         response.error = error.message;
 
-        if ( error.message.includes("SGR-001")||error.message.includes("SGR-002")||
-             error.message.includes("SGR-003")||error.message.includes("SGR-004")) {
-            response.error = "request was well-formed but server unable to process due to semantic errors";
+        if ( error.message.includes("SGR-001")){
+            response.error = "This contact number is already registered! Try other contact number.";
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-        } 
-
+        } else if(error.message.includes("SGR-002")){
+            response.error = "Invalid email-id format!";
+            returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+        }else if(error.message.includes("SGR-003")){
+            response.error = "Invalid contact Number!";
+            returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+        }else if(error.message.includes("SGR-004")){
+            response.error = "Weak password!";
+            returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+        }
     }
 
     return res.status(returnCode).send(response);
