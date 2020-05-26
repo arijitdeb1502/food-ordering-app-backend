@@ -31,9 +31,10 @@ const addressSchema = mongoose.Schema({
             }
         }
     },
-    state_uuid:{
-        type: String,
-        required: true
+    state:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'State'
     },
     resident:{
         type: mongoose.Schema.Types.ObjectId,
@@ -55,14 +56,6 @@ addressSchema.methods.getSaveAddressResponse = function(){
     ret.pincode=address.pincode;
     ret.state_uuid=address.state_uuid;
     ret.resident=address.resident;
-    // delete ret.request_id;
-    // delete ret.flat_building_name;
-    // delete ret.locality;
-    // delete ret.city;
-    // delete ret.pincode;
-    // delete ret.state_uuid;
-    // delete ret.resident;
-    // delete ret.__v;
 
     return ret;
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const State = mongoose.model('State', {
+const stateSchema = mongoose.Schema({
     state_uuid: {
         type: String,
         required: true,
@@ -12,5 +12,13 @@ const State = mongoose.model('State', {
         trim: true
     }
 })
+
+// stateSchema.virtual('addresses', {
+//     ref: 'Address',
+//     localField: '_id',
+//     foreignField: 'state'
+// })
+
+const State = mongoose.model('State', stateSchema);
 
 module.exports = State 

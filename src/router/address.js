@@ -13,4 +13,10 @@ router.post('/',
   auth.sendUpdateAddressResponse
 );
 
+router.get('/customer',
+  auth.authenticate(),
+  addressController.getAddresses()
+  // auth.sendGetAddressesResponse
+);
+
 module.exports = router;
