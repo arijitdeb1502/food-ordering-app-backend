@@ -41,7 +41,7 @@ const addressSchema = mongoose.Schema({
         required: true,
         ref: 'Customer'
     }
-});
+},{ timestamps: true });
 
 addressSchema.methods.getSaveAddressResponse = function(){
     

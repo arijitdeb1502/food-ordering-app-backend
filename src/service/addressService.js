@@ -36,7 +36,7 @@ const getAddresses = async(resident)=>{
 
   try{
 
-      const addresses=await Address.find(resident._id);
+      const addresses=await Address.find(resident._id).sort({"createdAt": 1});
       
       const response={}
       const respAddresses=[];
