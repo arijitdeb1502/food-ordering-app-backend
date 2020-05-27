@@ -38,12 +38,12 @@ const getAddresses = async(resident)=>{
 
       const addresses=await Address.find(resident._id);
       
-      const res=[];
+      const response={}
+      const respAddresses=[];
       
       for (address of addresses){
         await address.populate('state').execPopulate();
         const respAddress={}
-       
         respAddress.id=address._id;
         respAddress.flat_building_name=address.flat_building_name;
         respAddress.locality=address.locality;
@@ -51,12 +51,10 @@ const getAddresses = async(resident)=>{
         respAddress.pincode=address.pincode;
         respAddress.state=address.state;
 
-
-        res.push(respAddress)
+        respAddresses.push(respAddress)
       }
 
-      console.log(res);
-
+      return respAddresses;
 
   }catch(error){
 

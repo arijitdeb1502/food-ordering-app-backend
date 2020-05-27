@@ -15,8 +15,8 @@ router.post('/',
 
 router.get('/customer',
   auth.authenticate(),
-  addressController.getAddresses()
-  // auth.sendGetAddressesResponse
+  addressController.getAddresses(),
+  auth.sendGetAddressesResponse
 );
 
 module.exports = router;

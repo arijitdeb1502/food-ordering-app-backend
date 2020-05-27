@@ -13,11 +13,15 @@ const stateSchema = mongoose.Schema({
     }
 })
 
-// stateSchema.virtual('addresses', {
-//     ref: 'Address',
-//     localField: '_id',
-//     foreignField: 'state'
-// })
+
+stateSchema.methods.toJSON = function () {
+    const state = this;
+    const stateObject = state.toObject();
+
+    delete stateObject._id;
+    
+    return stateObject
+}
 
 const State = mongoose.model('State', stateSchema);
 
