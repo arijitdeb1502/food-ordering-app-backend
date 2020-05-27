@@ -65,7 +65,30 @@ const getAddresses = async(resident)=>{
 }
 
 
+const deleteAddress=async(resident_id,address_id)=>{
+
+  try{
+
+    // const address = await Address.findOneAndDelete({ _id: address_id, resident: resident_id })
+    console.log(resident_id+"resident_id");
+    console.log(address_id+"address_id");
+    
+    const address = await Address.findOne({ _id: address_id, resident: resident_id });
+
+    console.log(address+"deleteAddress");
+
+  }catch(error){
+
+    console.log('Something went wrong: addressService: deleteAddress', error);
+    throw new Error(error);
+
+  }
+
+
+}
+
 module.exports = {
       saveAddress: saveAddress,
-      getAddresses: getAddresses
+      getAddresses: getAddresses,
+      deleteAddress: deleteAddress
 }

@@ -19,4 +19,10 @@ router.get('/customer',
   auth.sendGetAddressesResponse
 );
 
+router.put('/delete/:address_id',
+  auth.authenticate(),
+  addressController.deleteAddress()
+  // auth.sendDeleteAddressResponse
+)
+
 module.exports = router;

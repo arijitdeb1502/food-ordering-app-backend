@@ -334,9 +334,9 @@ parameters:
     name: addressId
     type: string
     in: path
-    format: uuid
+    # format: uuid
     required: true
-    description: Unique identifier of Restaurant in a standard UUID format
+    description: Unique identifier of Restaurant
   BearerAuthorization:
     name: authorization
     type: string
@@ -428,7 +428,7 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
+        # format: uuid
         description: uuid of the deleted address
       status:
         type: string

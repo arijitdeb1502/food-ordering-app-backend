@@ -94,9 +94,47 @@ const getAddresses = ()=>{
 
 }
 
+const deleteAddress= ()=>{
+
+    return async (req,res,next) =>{
+    
+        let response={  };
+        let returnCode=400;
+        const request_id=uuid.v4();
+    
+        try{
+    
+            console.log(req.decoded._id+"Arijit Deb");
+            console.log(req.params.address_id+"Arijit Deb");
+            const responseFromService = await addressService.deleteAddress(req.decoded._id,req.params.address_id);
+
+            // response.addresses=responseFromService;
+            // req.request_id=request_id;
+            // req.responseFromController=response;
+            // req.returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+            // next();
+             
+    
+        }catch(error){
+            
+            console.log('Something went wrong: addressController: getAddresses', error);
+            
+            response.error = error.message;
+            returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+            
+            return res.status(returnCode).send(response);
+    
+        }
+        
+    }
+
+}
+
 
 
 module.exports = {
     saveAddress: saveAddress,
-    getAddresses: getAddresses
+    getAddresses: getAddresses,
+    deleteAddress: deleteAddress
 }
