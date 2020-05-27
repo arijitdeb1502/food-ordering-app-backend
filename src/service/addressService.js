@@ -14,7 +14,6 @@ const saveAddress = async ({ request_id,flat_building_name,locality, city , pinc
       if (!state) {
           throw new AddressNotFoundException('ANF-002', 'No state by this id');
       }
-      // console.log(state._id+"Arijit");
 
       const address = await Address.findOne({ flat_building_name });
       if (address) {

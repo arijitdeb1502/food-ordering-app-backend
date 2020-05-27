@@ -45,7 +45,7 @@ const saveAddress = ()=>{
                 returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
             } else if (error.message.includes("ANF-002")) {
                 response.error = "No state by this id";
-                returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+                returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
             } else if(error.message.includes("SAR-003")){
                 response.error = "Flat and building name must be unique";
                 returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
@@ -85,17 +85,7 @@ const getAddresses = ()=>{
             
             response.error = error.message;
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-            // if ( error.message.includes("SAR-002")) {
-            //     response.error = "Invalid pincode";
-            //     returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-            // } else if (error.message.includes("ANF-002")) {
-            //     response.error = "No state by this id";
-            //     returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-            // } else if(error.message.includes("SAR-003")){
-            //     response.error = "Flat and building name must be unique";
-            //     returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-            // }
-
+            
             return res.status(returnCode).send(response);
     
         }
