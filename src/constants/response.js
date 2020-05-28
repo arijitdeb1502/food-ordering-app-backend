@@ -28,6 +28,9 @@ const responseDetails = {
     },
     addressSaveSuccess: {
         message : "ADDRESS SUCCESSFULLY SAVED"
+    },
+    addressDeleteSuccess: {
+        message : "ADDRESS DELETED SUCCESSFULLY"
     }
 }
 

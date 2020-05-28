@@ -4,8 +4,9 @@ const State = require('../db/model/state');
 const mongoose = require('mongoose');
 
 const SaveAddressException = require('../errors/SaveAddressException');
-const UpdateCustomerException = require('../errors/UpdateCustomerException');
+// const UpdateCustomerException = require('../errors/UpdateCustomerException');
 const AddressNotFoundException = require('../errors/AddressNotFoundException');
+const AuthorizationFailedException = require('../errors/AuthorizationFailedException');
 
 const saveAddress = async ({ request_id,flat_building_name,locality, city , pincode , state_uuid, resident }) => {
     try {
@@ -73,9 +74,20 @@ const deleteAddress=async(resident_id,address_id)=>{
     console.log(resident_id+"resident_id");
     console.log(address_id+"address_id");
     
-    const address = await Address.findOne({ _id: address_id, resident: resident_id });
+    const addressById = await Address.findOne({ _id: address_id});
+    if(!addressById){
+      throw new AddressNotFoundException('ANF-003','No address by this id!')
+    }
 
-    console.log(address+"deleteAddress");
+    const addressForCustomer = await Address.findOne({ _id: address_id, resident: resident_id });
+    if(!addressForCustomer){
+      throw new AuthorizationFailedException('ATHR-004','No such address exist for this Customer!')
+    } else {
+      const address = await Address.findOneAndDelete({_id: address_id, resident: resident_id});
+    }
+
+    return address;
+
 
   }catch(error){
 

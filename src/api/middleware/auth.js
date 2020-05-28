@@ -159,10 +159,43 @@ const sendGetAddressesResponse= (req,res)=>{
 
 }
 
+const sendDeleteAddressResponse = (req,res)=>{
+
+    let response={};
+    let returnCode;
+    try{
+
+        let {id,request_id,status} = {...req};
+        returnCode=req.returnCode;
+
+        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
+
+        res.setHeader('request-id',request_id);
+        res.setHeader('access-token',token);
+
+        response.id=id;
+        response.status=status;
+    
+    }catch(error){
+
+        returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
+        response.error = "Cannot generate Auth Token and send response!!";
+
+        console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
+        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+
+    }
+
+    res.status(returnCode).send(response);
+
+
+}
+
 module.exports= {
     authenticate: authenticate,
     sendLoginResponse: generateAuthTokenAndRespondToLogin,
     sendUpdateCustomerResponse: generateAuthTokenAndRespondToUpdateCustomer,
     sendUpdateAddressResponse: sendUpdateAddressResponse,
-    sendGetAddressesResponse: sendGetAddressesResponse
+    sendGetAddressesResponse: sendGetAddressesResponse,
+    sendDeleteAddressResponse: sendDeleteAddressResponse
 }

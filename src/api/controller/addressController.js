@@ -3,6 +3,8 @@ const uuid = require('uuid');
 const responses = require('../../constants/response');
 const addressService = require('../../service/addressService');
 
+const AddressNotFoundException = require('../../errors/AddressNotFoundException');
+
 const saveAddress = ()=>{
 
     return async (req,res,next) =>{
@@ -85,6 +87,14 @@ const getAddresses = ()=>{
             
             response.error = error.message;
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+
+            if ( error.message.includes("ANF-003")) {
+                response.error = "No address by this id!";
+                returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
+            } else if (error.message.includes("ATHR-004")) {
+                response.error = "No state by this id";
+                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            } 
             
             return res.status(returnCode).send(response);
     
@@ -104,16 +114,19 @@ const deleteAddress= ()=>{
     
         try{
     
-            console.log(req.decoded._id+"Arijit Deb");
-            console.log(req.params.address_id+"Arijit Deb");
+            // console.log(req.decoded._id+"Arijit Deb");
+            // console.log(req.params.address_id+"Arijit Deb");
+            if(!req.params.address_id){
+                throw new AddressNotFoundException("ANF-005","Address id can not be empty");
+            }
             const responseFromService = await addressService.deleteAddress(req.decoded._id,req.params.address_id);
 
-            // response.addresses=responseFromService;
-            // req.request_id=request_id;
-            // req.responseFromController=response;
-            // req.returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+            req.id=responseFromService._id;
+            req.request_id=responseFromService.request_id;
+            req.status=responses.responseDetails.addressDeleteSuccess.message;
+            req.returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
 
-            // next();
+            next();
              
     
         }catch(error){
@@ -122,6 +135,11 @@ const deleteAddress= ()=>{
             
             response.error = error.message;
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+
+            if ( error.message.includes("ANF-005")) {
+                response.error = "Address id can not be empty!";
+                returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
+            }
             
             return res.status(returnCode).send(response);
     
