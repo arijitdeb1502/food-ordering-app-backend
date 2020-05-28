@@ -65,7 +65,7 @@ const customerInvalidEmailId = {
 const customerInvalidContactNumber = {
     first_name : "Tania",
     last_name : "Khan",
-    email_address : "taniK@",
+    email_address : "taniK@gmail.com",
     contact_number : "6598585555676",
     password : "tAnia1@3Jan"
 }
@@ -73,7 +73,7 @@ const customerInvalidContactNumber = {
 const customerWeakPassword = {
     first_name : "Tania",
     last_name : "Khan",
-    email_address : "taniK@",
+    email_address : "taniK@gmail.com",
     contact_number : "6598585559",
     password : "tania"
 }

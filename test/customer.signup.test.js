@@ -176,7 +176,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario5',async()=>{
 
     const responseStatusMessage = JSON.stringify(response.body.error);
 
-    expect(responseStatusMessage.includes("request was well-formed but server unable to process due to semantic errors")).toBe(true);
+    expect(responseStatusMessage.includes("This contact number is already registered! Try other contact number.")).toBe(true);
 
 })
 
@@ -187,7 +187,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario6',async()=>{
     }).expect(422);
 
     const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("request was well-formed but server unable to process due to semantic errors")).toBe(true);
+    expect(responseStatusMessage.includes("Invalid email-id format!")).toBe(true);
 
     let customer = await Customer.find( {
         contact_number: customerInvalidEmailId.contact_number
@@ -205,7 +205,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario7',async()=>{
     }).expect(422);
 
     const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("request was well-formed but server unable to process due to semantic errors")).toBe(true);
+    expect(responseStatusMessage.includes("Invalid email-id format!")).toBe(true);
 
     let customer = await Customer.find( {
         contact_number: customerInvalidEmailId.contact_number
@@ -223,8 +223,8 @@ test('Testing the customer/signup endpoint,FAILURE Scenario8',async()=>{
     }).expect(422);
 
     const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("request was well-formed but server unable to process due to semantic errors")).toBe(true);
-
+    console.log(responseStatusMessage);
+    expect(responseStatusMessage.includes("Invalid contact Number!")).toBe(true);
     let customer = await Customer.find( {
         contact_number: customerInvalidContactNumber.contact_number
      });
@@ -241,8 +241,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario9',async()=>{
     }).expect(422);
 
     const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("request was well-formed but server unable to process due to semantic errors")).toBe(true);
-
+    expect(responseStatusMessage.includes("Weak password!")).toBe(true);
     let customer = await Customer.find( {
         contact_number: customerWeakPassword.contact_number
      });
