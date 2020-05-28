@@ -37,6 +37,9 @@ const getAddresses = async(resident)=>{
   try{
 
       const addresses=await Address.find(resident._id).sort({"createdAt": 1});
+      if(!addresses){
+         throw new AddressNotFoundException("ANF-003","No Address By This Customer!!");
+      }
       
       const response={}
       const respAddresses=[];
@@ -70,9 +73,6 @@ const deleteAddress=async(resident_id,address_id)=>{
 
   try{
 
-    // const address = await Address.findOneAndDelete({ _id: address_id, resident: resident_id })
-    console.log(resident_id+"resident_id");
-    console.log(address_id+"address_id");
     
     const addressById = await Address.findOne({ _id: address_id});
     if(!addressById){

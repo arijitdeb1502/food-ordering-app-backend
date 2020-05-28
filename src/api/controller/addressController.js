@@ -89,11 +89,8 @@ const getAddresses = ()=>{
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
 
             if ( error.message.includes("ANF-003")) {
-                response.error = "No address by this id!";
+                response.error = "No address by this Customer!";
                 returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
-            } else if (error.message.includes("ATHR-004")) {
-                response.error = "No state by this id";
-                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             } 
             
             return res.status(returnCode).send(response);
@@ -114,8 +111,7 @@ const deleteAddress= ()=>{
     
         try{
     
-            // console.log(req.decoded._id+"Arijit Deb");
-            // console.log(req.params.address_id+"Arijit Deb");
+ 
             if(!req.params.address_id){
                 throw new AddressNotFoundException("ANF-005","Address id can not be empty");
             }
@@ -139,6 +135,12 @@ const deleteAddress= ()=>{
             if ( error.message.includes("ANF-005")) {
                 response.error = "Address id can not be empty!";
                 returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
+            } else if (error.message.includes("ANF-003")){
+                response.error = "No Address By that id!";
+                returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
+            } else if (error.message.includes("ATHR-004")){
+                response.error = "No such address exist for this Customer!";
+                returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
             
             return res.status(returnCode).send(response);
