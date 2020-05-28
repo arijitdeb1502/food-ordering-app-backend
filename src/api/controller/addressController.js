@@ -151,7 +151,37 @@ const deleteAddress= ()=>{
 
 }
 
-const getAllStates=async()=>{
+const getAllStates=async(req,res)=>{        
+
+        let response=[];
+        let returnCode=400;
+
+        try{
+
+            const responseFromService = await addressService.getAllStates();
+            
+            responseFromService.map((resp)=>{
+                
+                let eachRes={}
+                eachRes.state_uuid=resp.state_uuid;
+                eachRes.state_name=resp.state_name;
+                
+                response.push(eachRes);
+
+            })
+
+            returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+        }catch(error){
+
+            console.log('Something went wrong: addressController: getAddresses', error);
+            response={}
+            response.error = error.message;
+            returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
+
+        }
+
+        return res.status(returnCode).send(response);
 
 }
 

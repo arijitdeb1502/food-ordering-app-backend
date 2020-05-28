@@ -73,7 +73,6 @@ const deleteAddress=async(resident_id,address_id)=>{
 
   try{
 
-    
     const addressById = await Address.findOne({ _id: address_id});
     if(!addressById){
       throw new AddressNotFoundException('ANF-003','No address by this id!')
@@ -96,11 +95,28 @@ const deleteAddress=async(resident_id,address_id)=>{
 
   }
 
+}
+
+const getAllStates = async()=>{
+
+    try{
+
+      const states=State.find({});
+
+      return states
+
+    }catch(error){
+      
+      console.log('Something went wrong: addressService: getAllStates', error);
+      throw new Error(error);
+
+    }
 
 }
 
 module.exports = {
       saveAddress: saveAddress,
       getAddresses: getAddresses,
-      deleteAddress: deleteAddress
+      deleteAddress: deleteAddress,
+      getAllStates: getAllStates
 }
