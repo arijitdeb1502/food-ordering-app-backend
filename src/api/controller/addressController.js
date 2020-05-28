@@ -151,10 +151,14 @@ const deleteAddress= ()=>{
 
 }
 
+const getAllStates=async()=>{
+
+}
 
 
 module.exports = {
     saveAddress: saveAddress,
     getAddresses: getAddresses,
-    deleteAddress: deleteAddress
+    deleteAddress: deleteAddress,
+    getAllStates: getAllStates
 }

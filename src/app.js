@@ -33,6 +33,7 @@ const dbConnection = require('./db/connection');
 
 const customerRouter = require('./router/customer');
 const addressRouter = require('./router/address');
+const stateRouter = require('./router/state');
 
 
 const app = express();
@@ -48,6 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/customer', customerRouter);
 app.use('/api/address', addressRouter);
+app.use('/api/states',stateRouter);
 
 
 
