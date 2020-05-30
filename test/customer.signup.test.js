@@ -29,12 +29,9 @@ test('Testing the customer/signup endpoint,SUCCESS Scenario1',async()=>{
     const response=await request(app).post('/api/customer/signup').send({
         ...customerSuccessAllFlds
     }).expect(201);
-   
-    const responseStatusMessage = JSON.parse(response.text).status;
-    const responseIdValue = JSON.parse(response.text).id;
 
-    expect(responseIdValue).not.toBe(null);
-    expect(responseStatusMessage).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
+    expect(response.body.id).not.toBe(null);
+    expect(response.body.status).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
 
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -63,8 +60,8 @@ test('Testing the customer/signup endpoint,SUCCESS Scenario2',async()=>{
     const responseStatusMessage = JSON.parse(response.text).status;
     const responseIdValue = JSON.parse(response.text).id;
 
-    expect(responseIdValue).not.toBe(null);
-    expect(responseStatusMessage).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
+    expect(response.body.id).not.toBe(null);
+    expect(response.body.status).toBe("CUSTOMER SUCCESSFULLY REGISTERED");
 
     let customer = await Customer.find( {
         contact_number: customerSuccessNoLastName.contact_number
@@ -90,9 +87,8 @@ test('Testing the customer/signup endpoint,FAILURE Scenario1',async()=>{
         ...customerFailureNoFirstName
     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-
-    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
+   
+    expect(response.body.error).toBe("Except last name all fields should be filled with proper values");
 
     let customer = await Customer.find( {
         contact_number: customerFailureNoFirstName.contact_number
@@ -111,9 +107,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario2',async()=>{
         ...customerFailureNoEmailAddress
     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-
-    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
+    expect(response.body.error).toBe("Except last name all fields should be filled with proper values");
 
     let customer = await Customer.find( {
        contact_number: customerFailureNoEmailAddress.contact_number
@@ -131,9 +125,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario3',async()=>{
         ...customerFailureNoContact
     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-
-    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
+    expect(response.body.error).toBe("Except last name all fields should be filled with proper values");
 
     let customer = await Customer.find( {
        contact_number: customerFailureNoContact.contact_number
@@ -151,9 +143,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario4',async()=>{
         ...customerFailureNoPassword
     }).expect(400);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-
-    expect(responseStatusMessage.includes("Except last name all fields should be filled with proper values")).toBe(true);
+    expect(response.body.error).toBe("Except last name all fields should be filled with proper values");
 
     let customer = await Customer.find( {
        contact_number: customerFailureNoPassword.contact_number
@@ -176,7 +166,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario5',async()=>{
 
     const responseStatusMessage = JSON.stringify(response.body.error);
 
-    expect(responseStatusMessage.includes("This contact number is already registered! Try other contact number.")).toBe(true);
+    expect(response.body.error).toBe("This contact number is already registered! Try other contact number.");
 
 })
 
@@ -186,8 +176,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario6',async()=>{
         ...customerInvalidEmailId
     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("Invalid email-id format!")).toBe(true);
+    expect(response.body.error).toBe("Invalid email-id format!");
 
     let customer = await Customer.find( {
         contact_number: customerInvalidEmailId.contact_number
@@ -204,8 +193,7 @@ test('Testing the customer/signup endpoint,FAILURE Scenario7',async()=>{
         ...customerInvalidEmailId
     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("Invalid email-id format!")).toBe(true);
+    expect(response.body.error).toBe("Invalid email-id format!");
 
     let customer = await Customer.find( {
         contact_number: customerInvalidEmailId.contact_number
@@ -222,9 +210,8 @@ test('Testing the customer/signup endpoint,FAILURE Scenario8',async()=>{
         ...customerInvalidContactNumber
     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-    console.log(responseStatusMessage);
-    expect(responseStatusMessage.includes("Invalid contact Number!")).toBe(true);
+    expect(response.body.error).toBe("Invalid contact Number!");
+    
     let customer = await Customer.find( {
         contact_number: customerInvalidContactNumber.contact_number
      });
@@ -240,8 +227,8 @@ test('Testing the customer/signup endpoint,FAILURE Scenario9',async()=>{
         ...customerWeakPassword
     }).expect(422);
 
-    const responseStatusMessage = JSON.stringify(response.body.error);
-    expect(responseStatusMessage.includes("Weak password!")).toBe(true);
+    expect(response.body.error).toBe("Weak password!");
+
     let customer = await Customer.find( {
         contact_number: customerWeakPassword.contact_number
      });
