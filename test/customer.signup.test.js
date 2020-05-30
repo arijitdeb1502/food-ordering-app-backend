@@ -29,7 +29,7 @@ test('Testing the customer/signup endpoint,SUCCESS Scenario1',async()=>{
     const response=await request(app).post('/api/customer/signup').send({
         ...customerSuccessAllFlds
     }).expect(201);
-
+   
     const responseStatusMessage = JSON.parse(response.text).status;
     const responseIdValue = JSON.parse(response.text).id;
 
