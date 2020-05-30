@@ -26,7 +26,7 @@ test('Testing the customer/login endpoint,SUCCESS Scenario1',async()=>{
                            .set('authorization',base64EncodedCredentials)
                            .send().expect(200);
 
-    console.log(responseLogin.header["access-token"]);
+    // console.log(responseLogin.header["access-token"]);
 
     const responseLogout=await request(app)
                            .post('/api/customer/logout')
@@ -46,7 +46,7 @@ test('Testing the customer/login endpoint,Failure Scenario1',async()=>{
                            .set('authorization',improperAccesToken)
                            .send().expect(401);
 
-    expect(JSON.stringify(responseLogout.body.id)).not.toBe(null);
-    expect(JSON.stringify(responseLogout.body.error)).toBe("\"Please authenticate.\"");
+    expect(responseLogout.body.id).not.toBe(null);
+    expect(responseLogout.body.error).toBe("Please authenticate.");
     
 })

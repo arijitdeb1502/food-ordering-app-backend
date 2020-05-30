@@ -4,8 +4,8 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
-// const swaggerDocument = YAML.load(__dirname+'/api/endpoints/customer.yaml');
-const swaggerDocument = YAML.load(__dirname+'/api/endpoints/address.yaml');
+const swaggerDocument = YAML.load(__dirname+'/api/endpoints/customer.yaml');
+// const swaggerDocument = YAML.load(__dirname+'/api/endpoints/address.yaml');
 
 // Swagger definition
 // const swaggerDefinition = {

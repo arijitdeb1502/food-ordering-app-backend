@@ -78,6 +78,21 @@ const customerWeakPassword = {
     password : "tania"
 }
 
+const customerUpdateNameAllflds = {
+    first_name : "Auritra",
+    last_name : "Pal"
+}
+
+const customerUpdateNameNoLastNameflds = {
+    first_name : "Auritra",
+    last_name : ""
+}
+
+const customerUpdateNameNofirstNameflds = {
+    first_name : "",
+    last_name : "Pal"
+}
+
 module.exports= {
     customerSuccessAllFlds,
     customerSuccessNoLastName,
@@ -88,5 +103,8 @@ module.exports= {
     customerDuplicateFailure,
     customerInvalidEmailId,
     customerInvalidContactNumber,
-    customerWeakPassword
+    customerWeakPassword,
+    customerUpdateNameAllflds,
+    customerUpdateNameNoLastNameflds,
+    customerUpdateNameNofirstNameflds
 }
