@@ -28,7 +28,7 @@ const authenticate = ()=>{
 
             res.status(returnCode).send(response);
 
-            throw new AuthorizationFailedException("ATHR-001","Customer is not logged in!!");
+            // throw new AuthorizationFailedException("ATHR-001","Customer is not logged in!!");
         }
     }
 }
