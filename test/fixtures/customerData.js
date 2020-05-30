@@ -93,6 +93,44 @@ const customerUpdateNameNofirstNameflds = {
     last_name : "Pal"
 }
 
+const customerChangePasswordSuccess = {
+    old_password : "aBhiTithi1@3",
+    new_password : "aBhijan1@3"
+}
+
+const customerChangePasswordFailureNoOldPassword = {
+    new_password : "aBhijan1@3"
+}
+
+const customerChangePasswordFailureNoNewPassword = {
+    old_password : "aBhiTithi1@3"
+}
+
+const customerChangePasswordFailureIncorrectOldPassword = {
+    old_password : "aBhiTithi2@3",
+    new_password : "aBhijan1@3"
+}
+
+const customerChangePasswordFailureIncorrectNewPasswordFormat1 = {
+    old_password : "aBhiTithi1@3",
+    new_password : "password"
+}
+
+const customerChangePasswordFailureIncorrectNewPasswordFormat2 = {
+    old_password : "aBhiTithi1@3",
+    new_password : "aBhiBithi"
+}
+
+const customerChangePasswordFailureIncorrectNewPasswordFormat3 = {
+    old_password : "aBhiTithi1@3",
+    new_password : "aBhiBithi4"
+}
+
+const customerChangePasswordFailureIncorrectNewPasswordFormat4 = {
+    old_password : "aBhiTithi1@3",
+    new_password : "aBiT5@1"
+}
+
 module.exports= {
     customerSuccessAllFlds,
     customerSuccessNoLastName,
@@ -106,5 +144,13 @@ module.exports= {
     customerWeakPassword,
     customerUpdateNameAllflds,
     customerUpdateNameNoLastNameflds,
-    customerUpdateNameNofirstNameflds
+    customerUpdateNameNofirstNameflds,
+    customerChangePasswordSuccess,
+    customerChangePasswordFailureNoOldPassword,
+    customerChangePasswordFailureNoNewPassword,
+    customerChangePasswordFailureIncorrectOldPassword,
+    customerChangePasswordFailureIncorrectNewPasswordFormat1,
+    customerChangePasswordFailureIncorrectNewPasswordFormat2,
+    customerChangePasswordFailureIncorrectNewPasswordFormat3,
+    customerChangePasswordFailureIncorrectNewPasswordFormat4
 }

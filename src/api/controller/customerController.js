@@ -171,6 +171,9 @@ const changePassword= ()=>{
             else if(error.message.includes("UCR-004")){
                 response.error = "Old Password provided by the customer does not match";
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
+            } else if(error.message.includes("SGR-004")) {
+                response.error = "Weak password!";
+                returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
             }
 
             res.status(returnCode).send(response);
