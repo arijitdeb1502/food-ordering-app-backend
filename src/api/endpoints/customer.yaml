@@ -32,7 +32,7 @@ securityDefinitions:
       - The resulting string is encoded using the RFC2045-MIME variant of
       Base64, except not limited to 76 char/line.
 
-      - The authorization method and a space i.e. "Basic " is then put before
+      - The authorization method and a space i.e. 'Basic ' is then put before
       the encoded string.
 
 

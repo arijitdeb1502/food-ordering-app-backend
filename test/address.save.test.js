@@ -20,8 +20,8 @@ const {
 
 const {  customerSuccessAllFlds } = require('./fixtures/customerData');
 
-const base64EncodedCredentials="NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=";
-const improperAccesToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0";
+const base64EncodedCredentials='NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=';
+const improperAccesToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0';
 
 
 beforeEach(async () => {
@@ -44,23 +44,23 @@ test('Testing the post address endpoint,SUCCESS Scenario1',async()=>{
 
     const responseAddressSave1=await request(app)
                            .post('/api/address')
-                           .set('authorization',responseLogin.header["access-token"])
+                           .set('authorization',responseLogin.header['access-token'])
                            .send({
                                     ...addressSuccessAllFlds
                                 }).expect(201);
 
     expect(responseAddressSave1.body.id).not.toBe(null);
-    expect(responseAddressSave1.body.status).toBe("ADDRESS SUCCESSFULLY SAVED");
+    expect(responseAddressSave1.body.status).toBe('ADDRESS SUCCESSFULLY SAVED');
 
     const responseAddressSave2=await request(app)
                            .post('/api/address')
-                           .set('authorization',responseLogin.header["access-token"])
+                           .set('authorization',responseLogin.header['access-token'])
                            .send({
                                     ...addressSuccessAllFlds2
                                 }).expect(201);
 
     expect(responseAddressSave2.body.id).not.toBe(null);
-    expect(responseAddressSave2.body.status).toBe("ADDRESS SUCCESSFULLY SAVED");
+    expect(responseAddressSave2.body.status).toBe('ADDRESS SUCCESSFULLY SAVED');
     
 })
 
@@ -102,12 +102,12 @@ test('Testing the post address endpoint,FAILURE Scenario2',async()=>{
 
         const responseAddressSave1=await request(app)
                        .post('/api/address')
-                       .set('authorization',responseLogin.header["access-token"])
+                       .set('authorization',responseLogin.header['access-token'])
                        .send({
                                 ...addressFailureFldsEmpty1
                             }).expect(400);
 
-        expect(responseAddressSave1.body.error).toBe("No field can be empty");
+        expect(responseAddressSave1.body.error).toBe('No field can be empty');
     
 })
 
@@ -126,12 +126,12 @@ test('Testing the post address endpoint,FAILURE Scenario3',async()=>{
 
     const responseAddressSave1=await request(app)
                    .post('/api/address')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                             ...addressFailureFldsEmpty2
                         }).expect(400);
 
-    expect(responseAddressSave1.body.error).toBe("No field can be empty");
+    expect(responseAddressSave1.body.error).toBe('No field can be empty');
 
 })
 
@@ -150,12 +150,12 @@ test('Testing the post address endpoint,FAILURE Scenario4',async()=>{
 
     const responseAddressSave1=await request(app)
                    .post('/api/address')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                             ...addressFailureFldsEmpty3
                         }).expect(400);
 
-    expect(responseAddressSave1.body.error).toBe("No field can be empty");
+    expect(responseAddressSave1.body.error).toBe('No field can be empty');
 
 })
 
@@ -174,12 +174,12 @@ test('Testing the post address endpoint,FAILURE Scenario5',async()=>{
 
     const responseAddressSave1=await request(app)
                    .post('/api/address')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                             ...addressFailureFldsEmpty4
                         }).expect(400);
 
-    expect(responseAddressSave1.body.error).toBe("No field can be empty");
+    expect(responseAddressSave1.body.error).toBe('No field can be empty');
 
 })
 
@@ -198,12 +198,12 @@ test('Testing the post address endpoint,FAILURE Scenario6',async()=>{
 
     const responseAddressSave1=await request(app)
                    .post('/api/address')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                             ...addressFailureFldsEmpty5
                         }).expect(400);
 
-    expect(responseAddressSave1.body.error).toBe("No field can be empty");
+    expect(responseAddressSave1.body.error).toBe('No field can be empty');
 
 })
 
@@ -222,14 +222,14 @@ test('Testing the post address endpoint,FAILURE Scenario7',async()=>{
 
     const responseAddressSave1=await request(app)
                    .post('/api/address')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                             ...addressFailureUnmatchedState
                         }).expect(404);
 
-    // console.log(JSON.stringify(responseAddressSave1.body)+"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    // console.log(JSON.stringify(responseAddressSave1.body)+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
-    expect(responseAddressSave1.body.error).toBe("No state by this id");
+    expect(responseAddressSave1.body.error).toBe('No state by this id');
 
 })
 
@@ -248,14 +248,14 @@ test('Testing the post address endpoint,FAILURE Scenario8',async()=>{
 
     const responseAddressSave1=await request(app)
                    .post('/api/address')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                             ...addressFailurefldInvalidPin
                         }).expect(422);
 
-    // console.log(JSON.stringify(responseAddressSave1.body)+"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    // console.log(JSON.stringify(responseAddressSave1.body)+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
-    expect(responseAddressSave1.body.error).toBe("Invalid pincode");
+    expect(responseAddressSave1.body.error).toBe('Invalid pincode');
 
 })
 

@@ -6,8 +6,8 @@ const app = require('../src/app');
 const Customer = require('../src/db/model/customer');
 
 const {  customerSuccessAllFlds } = require('./fixtures/customerData');
-const base64EncodedCredentials="NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=";
-const improperAccesToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0";
+const base64EncodedCredentials='NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=';
+const improperAccesToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0';
 
 
 beforeEach(async () => {
@@ -26,15 +26,15 @@ test('Testing the customer/login endpoint,SUCCESS Scenario1',async()=>{
                            .set('authorization',base64EncodedCredentials)
                            .send().expect(200);
 
-    // console.log(responseLogin.header["access-token"]);
+    // console.log(responseLogin.header['access-token']);
 
     const responseLogout=await request(app)
                            .post('/api/customer/logout')
-                           .set('authorization',responseLogin.header["access-token"])
+                           .set('authorization',responseLogin.header['access-token'])
                            .send().expect(200);
 
     expect(responseLogout.body.id).not.toBe(null);
-    expect(responseLogout.body.message).toBe("Logged out successfully");
+    expect(responseLogout.body.message).toBe('Logged out successfully');
     
 })
 
@@ -47,6 +47,6 @@ test('Testing the customer/login endpoint,Failure Scenario1',async()=>{
                            .send().expect(401);
 
     expect(responseLogout.body.id).not.toBe(null);
-    expect(responseLogout.body.error).toBe("Please authenticate.");
+    expect(responseLogout.body.error).toBe('Please authenticate.');
     
 })

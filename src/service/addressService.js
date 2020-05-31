@@ -36,9 +36,9 @@ const getAddresses = async(resident)=>{
 
   try{
 
-      const addresses=await Address.find(resident._id).sort({"createdAt": 1});
+      const addresses=await Address.find(resident._id).sort({'createdAt': 1});
       if(addresses.length===0){
-         throw new AddressNotFoundException("ANF-003","No Address By This Customer!!");
+         throw new AddressNotFoundException('ANF-003','No Address By This Customer!!');
       }
       
       const response={}

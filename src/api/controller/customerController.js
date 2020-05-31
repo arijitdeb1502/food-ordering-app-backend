@@ -28,17 +28,17 @@ const signup = async (req,res) =>{
         
         response.error = error.message;
 
-        if ( error.message.includes("SGR-001")){
-            response.error = "This contact number is already registered! Try other contact number.";
+        if ( error.message.includes('SGR-001')){
+            response.error = 'This contact number is already registered! Try other contact number.';
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-        } else if(error.message.includes("SGR-002")){
-            response.error = "Invalid email-id format!";
+        } else if(error.message.includes('SGR-002')){
+            response.error = 'Invalid email-id format!';
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-        }else if(error.message.includes("SGR-003")){
-            response.error = "Invalid contact Number!";
+        }else if(error.message.includes('SGR-003')){
+            response.error = 'Invalid contact Number!';
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-        }else if(error.message.includes("SGR-004")){
-            response.error = "Weak password!";
+        }else if(error.message.includes('SGR-004')){
+            response.error = 'Weak password!';
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
         }
     }
@@ -59,7 +59,7 @@ const login = ()=>{
             const responseFromLoginService = await customerService.login(req.headers.decoded_contact_number,req.headers.decoded_password);
             
             req.customer=responseFromLoginService.customer;
-            req.respMessage="LOGGED IN SUCCESSFULLY";
+            req.respMessage='LOGGED IN SUCCESSFULLY';
             req.returnCode=responses.responseDetails.returnCodes.AUTHENTICATION_SUCCESS;
 
             next();
@@ -68,8 +68,8 @@ const login = ()=>{
 
             console.log('Something went wrong: customerController: login', error);
             response.error = error.message;
-            if ( error.message.includes("ATH-001")|| error.message.includes("ATH-004")||error.message.includes("ATH-002")) {
-                response.error = "Either customer is not registered or has provided incorrect credentials";
+            if ( error.message.includes('ATH-001')|| error.message.includes('ATH-004')||error.message.includes('ATH-002')) {
+                response.error = 'Either customer is not registered or has provided incorrect credentials';
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
 
@@ -127,8 +127,8 @@ const updateCustomer = ()=>{
         } catch(error){
             console.log('Something went wrong: customerController: updateCustomer', error);
             response.error = error.message;
-            if ( error.message.includes("ATH-001")) {
-                response.error = "Either customer is not registered or has logged out";
+            if ( error.message.includes('ATH-001')) {
+                response.error = 'Either customer is not registered or has logged out';
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
 
@@ -164,15 +164,15 @@ const changePassword= ()=>{
             console.log('Something went wrong: customerController: updateCustomer', error);
             response.error = error.message;
 
-            if ( error.message.includes("ATH-001")) {
-                response.error = "Either customer is not registered or has logged out";
+            if ( error.message.includes('ATH-001')) {
+                response.error = 'Either customer is not registered or has logged out';
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
-            else if(error.message.includes("UCR-004")){
-                response.error = "Old Password provided by the customer does not match";
+            else if(error.message.includes('UCR-004')){
+                response.error = 'Old Password provided by the customer does not match';
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
-            } else if(error.message.includes("SGR-004")) {
-                response.error = "Weak password!";
+            } else if(error.message.includes('SGR-004')) {
+                response.error = 'Weak password!';
                 returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
             }
 

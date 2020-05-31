@@ -15,7 +15,7 @@ const authenticate = ()=>{
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.decoded=decoded;
-            // console.log(JSON.stringify(req.originalUrl)+"XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            // console.log(JSON.stringify(req.originalUrl)+'XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
             return next();
 
 
@@ -23,12 +23,12 @@ const authenticate = ()=>{
 
             console.log('Something went wrong: auth: authenticate', error);
             
-            response.error = "Please authenticate.";
+            response.error = 'Please authenticate.';
             returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
 
             res.status(returnCode).send(response);
 
-            // throw new AuthorizationFailedException("ATHR-001","Customer is not logged in!!");
+            // throw new AuthorizationFailedException('ATHR-001','Customer is not logged in!!');
         }
     }
 }
@@ -56,10 +56,10 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
     }catch(error){
 
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
-        response.error = "Cannot generate Auth Token and send response!!";
+        response.error = 'Cannot generate Auth Token and send response!!';
 
         console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
-        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+        throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }
 
@@ -87,10 +87,10 @@ const generateAuthTokenAndRespondToUpdateCustomer = (req,res)=>{
     }catch(error){
 
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
-        response.error = "Cannot generate Auth Token and send response!!";
+        response.error = 'Cannot generate Auth Token and send response!!';
 
         console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
-        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+        throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }
 
@@ -118,10 +118,10 @@ const sendUpdateAddressResponse = (req,res)=>{
     }catch(error){
 
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
-        response.error = "Cannot generate Auth Token and send response!!";
+        response.error = 'Cannot generate Auth Token and send response!!';
 
         console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
-        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+        throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }
 
@@ -148,10 +148,10 @@ const sendGetAddressesResponse= (req,res)=>{
     }catch(error){
 
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
-        response.error = "Cannot generate Auth Token and send response!!";
+        response.error = 'Cannot generate Auth Token and send response!!';
 
         console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
-        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+        throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }
 
@@ -179,10 +179,10 @@ const sendDeleteAddressResponse = (req,res)=>{
     }catch(error){
 
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
-        response.error = "Cannot generate Auth Token and send response!!";
+        response.error = 'Cannot generate Auth Token and send response!!';
 
         console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
-        throw new AuthorizationFailedException("ATHR-006","Error generating JSON Web Token");
+        throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }
 

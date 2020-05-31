@@ -12,8 +12,8 @@ const {
          customerUpdateNameNofirstNameflds
       } = require('./fixtures/customerData');
 
-const base64EncodedCredentials="NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=";
-const improperAccesToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0";
+const base64EncodedCredentials='NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=';
+const improperAccesToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0';
 
 
 
@@ -36,14 +36,14 @@ test('Testing the customer/  put / update name endpoint,SUCCESS Scenario1',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerUpdateNameAllflds
                    }).expect(200);
 
     expect(responseUpdateCustName.body.id).not.toBe(null);
-    expect(responseUpdateCustName.header["access-token"]).not.toBe(null);
-    expect(responseUpdateCustName.body.status).toBe("USER DETAILS SUCCESSFULLY UPDATED");
+    expect(responseUpdateCustName.header['access-token']).not.toBe(null);
+    expect(responseUpdateCustName.body.status).toBe('USER DETAILS SUCCESSFULLY UPDATED');
 
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -73,14 +73,14 @@ test('Testing the customer/  put / update name endpoint,SUCCESS Scenario2',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerUpdateNameNoLastNameflds
                    }).expect(200);
 
     expect(responseUpdateCustName.body.id).not.toBe(null);
-    expect(responseUpdateCustName.header["access-token"]).not.toBe(null);
-    expect(responseUpdateCustName.body.status).toBe("USER DETAILS SUCCESSFULLY UPDATED");
+    expect(responseUpdateCustName.header['access-token']).not.toBe(null);
+    expect(responseUpdateCustName.body.status).toBe('USER DETAILS SUCCESSFULLY UPDATED');
 
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -111,12 +111,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario1',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerUpdateNameNofirstNameflds
                    }).expect(400);
 
-    expect(responseUpdateCustName.body.error).toBe("ValidationError: first_name: Path `first_name` is required.");
+    expect(responseUpdateCustName.body.error).toBe('ValidationError: first_name: Path `first_name` is required.');
 
 })
 
@@ -136,7 +136,7 @@ test('Testing the customer/  put / update name endpoint,FALURE Scenario2',async(
                         ...customerUpdateNameAllflds
                    }).expect(401);
 
-    expect(responseUpdateCustName.body.error).toBe("Please authenticate.");
+    expect(responseUpdateCustName.body.error).toBe('Please authenticate.');
 
 })
 

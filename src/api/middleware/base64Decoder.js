@@ -19,8 +19,8 @@ const decode = ()=>{
 
             const bufferedCredentials=Buffer.from(authorizationHeaderVal,'base64');
             const decodedCredentials=bufferedCredentials.toString();
-            const contact_number=decodedCredentials.split(":")[0];
-            const password=decodedCredentials.split(":")[1];
+            const contact_number=decodedCredentials.split(':')[0];
+            const password=decodedCredentials.split(':')[1];
             
             if(contact_number && password){
                 req.headers.decoded_contact_number=contact_number;
@@ -36,9 +36,9 @@ const decode = ()=>{
 
             console.log('Something went wrong: base64decoder: decode', error);
 
-            response.error = "Invalid request! Authorization header is either not encoded properly or imporoper value provided";
+            response.error = 'Invalid request! Authorization header is either not encoded properly or imporoper value provided';
 
-            if ( error.message.includes("ATH-003")||error.message.includes("ATH-004")){
+            if ( error.message.includes('ATH-003')||error.message.includes('ATH-004')){
                 returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
             }
 

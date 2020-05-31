@@ -1,6 +1,6 @@
 const responseDetails = {    
     // invalidRequestSchemaResponse : {
-    //     BAD_REQUEST_MESSAGE : "Invalid input request schema!!"
+    //     BAD_REQUEST_MESSAGE : 'Invalid input request schema!!'
     // },
     returnCodes :{
         CREATE_SUCCESS: 201,
@@ -15,22 +15,22 @@ const responseDetails = {
 
     },
     customerSignupSuccess: {
-        message : "CUSTOMER SUCCESSFULLY REGISTERED"
+        message : 'CUSTOMER SUCCESSFULLY REGISTERED'
     },
     customerLogoutSuccess: {
-        message : "Logged out successfully"
+        message : 'Logged out successfully'
     },
     customerUpdateSuccess: {
-        message : "USER DETAILS SUCCESSFULLY UPDATED"
+        message : 'USER DETAILS SUCCESSFULLY UPDATED'
     },
     passwordChangeSuccess: {
-        message : "USER PASSWORD SUCCESSFULLY UPDATED"
+        message : 'USER PASSWORD SUCCESSFULLY UPDATED'
     },
     addressSaveSuccess: {
-        message : "ADDRESS SUCCESSFULLY SAVED"
+        message : 'ADDRESS SUCCESSFULLY SAVED'
     },
     addressDeleteSuccess: {
-        message : "ADDRESS DELETED SUCCESSFULLY"
+        message : 'ADDRESS DELETED SUCCESSFULLY'
     }
 }
 

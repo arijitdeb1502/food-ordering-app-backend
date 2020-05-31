@@ -17,8 +17,8 @@ const {
          customerChangePasswordFailureIncorrectNewPasswordFormat4
       } = require('./fixtures/customerData');
 
-const base64EncodedCredentials="NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=";
-const improperAccesToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0";
+const base64EncodedCredentials='NjU5ODU4MTExMTphQmhpVGl0aGkxQDM=';
+const improperAccesToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFkZTNmN2M3MjM4MDFlMzA0NWU2MTYiLCJpYXQiOjE1ODg0NTQ0NzUsImV4cCI6MTU4ODQ2MTY3NX0.DTS1cfkcG3fDj8BvWvGlt1YBCxg6fRgHYcrRNJt0ER0';
 
 
 
@@ -41,14 +41,14 @@ test('Testing the customer/  put / update name endpoint,SUCCESS Scenario1',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordSuccess
                    }).expect(200);
 
     expect(responseUpdateCustName.body.id).not.toBe(null);
-    expect(responseUpdateCustName.header["access-token"]).not.toBe(null);
-    expect(responseUpdateCustName.body.status).toBe("USER PASSWORD SUCCESSFULLY UPDATED");
+    expect(responseUpdateCustName.header['access-token']).not.toBe(null);
+    expect(responseUpdateCustName.body.status).toBe('USER PASSWORD SUCCESSFULLY UPDATED');
 
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -79,12 +79,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario1',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureNoOldPassword
                    }).expect(400);
 
-    expect(responseUpdateCustName.body.error).toBe("Both old and new password must be provided");
+    expect(responseUpdateCustName.body.error).toBe('Both old and new password must be provided');
 
 })
 
@@ -102,12 +102,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario2',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureNoNewPassword
                    }).expect(400);
 
-    expect(responseUpdateCustName.body.error).toBe("Both old and new password must be provided");
+    expect(responseUpdateCustName.body.error).toBe('Both old and new password must be provided');
 
 })
 
@@ -127,7 +127,7 @@ test('Testing the customer/  put / update name endpoint,FALURE Scenario3',async(
                         ...customerChangePasswordSuccess
                    }).expect(401);
 
-    expect(responseUpdateCustName.body.error).toBe("Please authenticate.");
+    expect(responseUpdateCustName.body.error).toBe('Please authenticate.');
 
 })
 
@@ -145,7 +145,7 @@ test('Testing the customer/  put / update name endpoint,FALURE Scenario4',async(
                         ...customerChangePasswordSuccess
                    }).expect(401);
 
-    expect(responseUpdateCustName.body.error).toBe("Please authenticate.");
+    expect(responseUpdateCustName.body.error).toBe('Please authenticate.');
 
 })
 
@@ -163,12 +163,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario5',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureIncorrectOldPassword
                    }).expect(401);
 
-    expect(responseUpdateCustName.body.error).toBe("Old Password provided by the customer does not match");
+    expect(responseUpdateCustName.body.error).toBe('Old Password provided by the customer does not match');
     
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -198,12 +198,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario6',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureIncorrectNewPasswordFormat1
                    }).expect(422);
 
-    expect(responseUpdateCustName.body.error).toBe("Weak password!");
+    expect(responseUpdateCustName.body.error).toBe('Weak password!');
     
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -233,12 +233,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario7',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureIncorrectNewPasswordFormat2
                    }).expect(422);
 
-    expect(responseUpdateCustName.body.error).toBe("Weak password!");
+    expect(responseUpdateCustName.body.error).toBe('Weak password!');
     
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -268,12 +268,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario8',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureIncorrectNewPasswordFormat3
                    }).expect(422);
 
-    expect(responseUpdateCustName.body.error).toBe("Weak password!");
+    expect(responseUpdateCustName.body.error).toBe('Weak password!');
     
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number
@@ -303,12 +303,12 @@ test('Testing the customer/  put / update name endpoint,FAILURE Scenario9',async
 
     const responseUpdateCustName=await request(app)
                    .put('/api/customer/password')
-                   .set('authorization',responseLogin.header["access-token"])
+                   .set('authorization',responseLogin.header['access-token'])
                    .send({
                         ...customerChangePasswordFailureIncorrectNewPasswordFormat4
                    }).expect(422);
 
-    expect(responseUpdateCustName.body.error).toBe("Weak password!");
+    expect(responseUpdateCustName.body.error).toBe('Weak password!');
     
     let customer = await Customer.find( {
         contact_number: customerSuccessAllFlds.contact_number

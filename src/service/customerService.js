@@ -42,7 +42,7 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
       const customer=await Customer.findOne({'_id': id });
 
       if(!customer){
-            throw new AuthorizationFailedException("ATHR-001","Customer is not Logged in.");
+            throw new AuthorizationFailedException('ATHR-001','Customer is not Logged in.');
       }
 
       return customer;
@@ -61,7 +61,7 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
       const customer=await Customer.findOne({'_id': customer_id });
 
       if(!customer){
-            throw new AuthorizationFailedException("ATHR-001","Customer is not Logged in.");
+            throw new AuthorizationFailedException('ATHR-001','Customer is not Logged in.');
       }
       
       for(fields in updatedFlds){
@@ -86,16 +86,16 @@ const signup = async ({ request_id,first_name, last_name , email_address , conta
       const customer=await Customer.findOne({'_id': customer_id });
 
       if(!customer){
-            throw new AuthorizationFailedException("ATHR-001","Customer is not Logged in.");
+            throw new AuthorizationFailedException('ATHR-001','Customer is not Logged in.');
       }
 
       const isMatch = await bcrypt.compare(updatedFlds.old_password, customer.password);
       
       if(!isMatch){
-        throw new UpdateCustomerException("UCR-004","Incorrect old password!");
+        throw new UpdateCustomerException('UCR-004','Incorrect old password!');
       }
 
-      customer["password"]=updatedFlds["new_password"];
+      customer['password']=updatedFlds['new_password'];
 
       const updatedCustomer = await customer.save();
 

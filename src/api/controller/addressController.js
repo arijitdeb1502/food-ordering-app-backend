@@ -42,14 +42,14 @@ const saveAddress = ()=>{
             
             response.error = error.message;
     
-            if ( error.message.includes("SAR-002")) {
-                response.error = "Invalid pincode";
+            if ( error.message.includes('SAR-002')) {
+                response.error = 'Invalid pincode';
                 returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
-            } else if (error.message.includes("ANF-002")) {
-                response.error = "No state by this id";
+            } else if (error.message.includes('ANF-002')) {
+                response.error = 'No state by this id';
                 returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
-            } else if(error.message.includes("SAR-003")){
-                response.error = "Flat and building name must be unique";
+            } else if(error.message.includes('SAR-003')){
+                response.error = 'Flat and building name must be unique';
                 returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
             }
 
@@ -88,8 +88,8 @@ const getAddresses = ()=>{
             response.error = error.message;
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
 
-            if ( error.message.includes("ANF-003")) {
-                response.error = "No address by this Customer!";
+            if ( error.message.includes('ANF-003')) {
+                response.error = 'No address by this Customer!';
                 returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
             } 
             
@@ -132,14 +132,14 @@ const deleteAddress= ()=>{
             response.error = error.message;
             returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
 
-            if ( error.message.includes("ANF-005")) {
-                response.error = "Address id can not be empty!";
+            if ( error.message.includes('ANF-005')) {
+                response.error = 'Address id can not be empty!';
                 returnCode=responses.responseDetails.returnCodes.BAD_REQUEST;
-            } else if (error.message.includes("ANF-003")){
-                response.error = "No Address By that id!";
+            } else if (error.message.includes('ANF-003')){
+                response.error = 'No Address By that id!';
                 returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
-            } else if (error.message.includes("ATHR-004")){
-                response.error = "No such address exist for this Customer!";
+            } else if (error.message.includes('ATHR-004')){
+                response.error = 'No such address exist for this Customer!';
                 returnCode=responses.responseDetails.returnCodes.UNAUTHORIZED;
             }
             
