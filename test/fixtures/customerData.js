@@ -6,6 +6,14 @@ const customerSuccessAllFlds = {
     password : "aBhiTithi1@3"
 }
 
+const customerSuccessAllFlds1 = {
+    first_name : "Arijit",
+    last_name : "Pal",
+    email_address : "arijitpal@gmail.com",
+    contact_number : "6598581113",
+    password : "aBhiTithi1@3"
+}
+
 const customerSuccessNoLastName = {
     first_name : "Auritra",
     last_name : "",
@@ -152,5 +160,6 @@ module.exports= {
     customerChangePasswordFailureIncorrectNewPasswordFormat1,
     customerChangePasswordFailureIncorrectNewPasswordFormat2,
     customerChangePasswordFailureIncorrectNewPasswordFormat3,
-    customerChangePasswordFailureIncorrectNewPasswordFormat4
+    customerChangePasswordFailureIncorrectNewPasswordFormat4,
+    customerSuccessAllFlds1
 }

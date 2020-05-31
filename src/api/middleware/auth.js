@@ -15,7 +15,7 @@ const authenticate = ()=>{
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.decoded=decoded;
-
+            // console.log(JSON.stringify(req.originalUrl)+"XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             return next();
 
 

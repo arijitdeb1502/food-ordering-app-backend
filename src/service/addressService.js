@@ -72,17 +72,17 @@ const getAddresses = async(resident)=>{
 const deleteAddress=async(resident_id,address_id)=>{
 
   try{
-
     const addressById = await Address.findOne({ _id: address_id});
     if(!addressById){
       throw new AddressNotFoundException('ANF-003','No address by this id!')
     }
-
+    
+    let address;
     const addressForCustomer = await Address.findOne({ _id: address_id, resident: resident_id });
     if(!addressForCustomer){
       throw new AuthorizationFailedException('ATHR-004','No such address exist for this Customer!')
     } else {
-      const address = await Address.findOneAndDelete({_id: address_id, resident: resident_id});
+      address = await Address.findOneAndDelete({_id: address_id, resident: resident_id});
     }
 
     return address;

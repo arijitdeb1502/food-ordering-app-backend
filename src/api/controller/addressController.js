@@ -111,10 +111,10 @@ const deleteAddress= ()=>{
     
         try{
     
- 
             if(!req.params.address_id){
-                throw new AddressNotFoundException("ANF-005","Address id can not be empty");
+                throw new AddressNotFoundException('ANF-005','Address id can not be empty');
             }
+
             const responseFromService = await addressService.deleteAddress(req.decoded._id,req.params.address_id);
 
             req.id=responseFromService._id;
