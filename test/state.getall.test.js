@@ -16,7 +16,7 @@ test('Testing the getall state endpoint,SUCCESS Scenario1',async()=>{
                 .expect(200);
 
     const actualStates={};
-    response.body.map((state)=>{
+    response.body.states.map((state)=>{
         actualStates[state.state_uuid]=state.state_name;
     })
 
@@ -25,7 +25,7 @@ test('Testing the getall state endpoint,SUCCESS Scenario1',async()=>{
         expectedData[state.state_uuid]=state.state_name
     }
 
-    expect(response.body.length).toBe(36);
+    expect(response.body.states.length).toBe(36);
     expect(expectedData).toEqual(actualStates);
     
 })

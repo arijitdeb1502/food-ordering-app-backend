@@ -153,7 +153,8 @@ const deleteAddress= ()=>{
 
 const getAllStates=async(req,res)=>{        
 
-        let response=[];
+        let responseArray=[];
+        let response={};
         let returnCode=400;
 
         try{
@@ -166,10 +167,11 @@ const getAllStates=async(req,res)=>{
                 eachRes.state_uuid=resp.state_uuid;
                 eachRes.state_name=resp.state_name;
                 
-                response.push(eachRes);
+                responseArray.push(eachRes);
 
             })
 
+            response.states=responseArray;
             returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
 
         }catch(error){
