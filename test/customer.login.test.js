@@ -1,7 +1,7 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
 
-const app = require('../src/app');
+const app = require('../src/Swagger_Multi_app');
 
 const Customer = require('../src/db/model/customer');
 
@@ -32,7 +32,7 @@ test('Testing the customer/login endpoint,SUCCESS Scenario1',async()=>{
     expect(response.body.email_address).toBe(customerSuccessAllFlds.email_address);
     expect(response.body.contact_number).toBe(customerSuccessAllFlds.contact_number);
     expect(response.body.message).toBe('LOGGED IN SUCCESSFULLY');
-
+    
     const decoded = jwt.verify(response.header['access-token'], process.env.JWT_SECRET);
 
     expect(decoded._id).not.toBe(null);

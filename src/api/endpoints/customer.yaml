@@ -1,12 +1,12 @@
-# swagger: '2.0'
-# info:
-#   title: Customer API
-#   version: 1.0.0
-#   description: API of Customer Services
-# host: localhost:3001
-# schemes:
-#   - http
-#   - https
+swagger: '2.0'
+info:
+  title: Customer API
+  version: 1.0.0
+  description: API of Customer Services
+host: localhost:3001
+schemes:
+  - http
+  - https
 basePath: /api
 tags:
   - name: 'API#001 Customers'
