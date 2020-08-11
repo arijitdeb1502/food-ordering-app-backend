@@ -38,7 +38,7 @@ const app = express();
 dbConnection();
 
 // cors (This is used to tackle cross compatibility issue)
-app.use(cors());
+app.use(cors({exposedHeaders: ['request-id', 'access-token', 'Content-Length']}));
 
 // request payload middleware
 app.use(express.json());
