@@ -28,19 +28,10 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/server.js",
-    "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
+    "test": "env-cmd -f ./config/test.env jest --watchAll --runInBand"
   },
   "jest": {
-    "testEnvironment": "node",
-    "reporters": [
-      "default",
-      [
-        "./node_modules/jest-html-reporter",
-        {
-          "pageTitle": "Test Report"
-        }
-      ]
-    ]
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC"
