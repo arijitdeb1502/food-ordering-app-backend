@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
 // Swagger definition config
-const swaggerDefinition = {
+const swaggerDefinition =  {
     info:  {
       "title": 'REST API for Food Ordering app API', // Title of the documentation
       "version": '1.0.0', // Version of the app
