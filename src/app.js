@@ -31,6 +31,7 @@ const dbConnection = require('./db/connection');
 const customerRouter = require('./router/customer');
 const addressRouter = require('./router/address');
 const stateRouter = require('./router/state');
+const restaurantRouter = require('./router/restaurant');
 
 
 const app = express();
@@ -52,6 +53,7 @@ if (process.env.NODE_ENV != 'production') {
 app.use('/api/customer', customerRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/states',stateRouter);
+app.use('/api/restaurant',restaurantRouter);
 
 
 module.exports = app;
