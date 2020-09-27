@@ -65,7 +65,7 @@ const customerSchema = new mongoose.Schema({
 
         }
     }
-},{ timestamps: true });
+},{ timestamps: true }); 
 
 customerSchema.virtual('addresses', {
     ref: 'Address',

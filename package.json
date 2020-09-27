@@ -10,6 +10,7 @@
     "express": "^4.17.1",
     "is-base64": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.2",
     "mongoose": "^5.9.7",
     "password-validator": "^5.0.3",
     "swagger-jsdoc": "^4.0.0",

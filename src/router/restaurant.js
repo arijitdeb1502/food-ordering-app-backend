@@ -1,8 +1,9 @@
 const express = require('express');
 const router = new express.Router();
+const restaurantController=require('../api/controller/restaurantController');
 
-router.get('/',(req,res)=>{
-    res.send({"test":"test"});
-})
+router.get('/',
+    restaurantController.getAllRestaurants
+)
 
 module.exports = router;

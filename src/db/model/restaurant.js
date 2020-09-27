@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-//restaurant has a one to one relationship with address 
-//and one to one relation with category
+//restaurant has a one to many relationship with address (one way)
+//and one to one relation with category (one way)
 const restaurantSchema=new mongoose.Schema({
         request_id : {
             type: String,
@@ -31,11 +31,11 @@ const restaurantSchema=new mongoose.Schema({
             required: true,
             ref: 'Address'
         },
-        categories: {
+        categories: [{
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'Categories'
-        }
+            ref: 'Category'
+        }]
     },{ timestamps: true });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
