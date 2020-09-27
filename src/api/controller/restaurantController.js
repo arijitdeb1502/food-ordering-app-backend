@@ -2,13 +2,12 @@ const responses = require('../../constants/response');
 const restaurantService = require('../../service/restaurantService')
 
 const getAllRestaurants = async(req,res)=>{
-    let responseArray=[];
     let response={};
     let returnCode=400;
 
     try{
         const responseFromService = await restaurantService.getAllRestaurants();
-        response=responseFromService;
+        response.restaurants=responseFromService;
         returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
 
     }catch(error){
