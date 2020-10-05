@@ -50,7 +50,18 @@ const getResataurantByName=async (req,res)=>{
 
 }
 
+const getResataurantByCatId=async (req,res)=>{
+
+    const responseFromService = await restaurantService.getRestaurantsByCategoryId(req.params.category_id);
+
+
+    res.status(200).send(responseFromService);
+
+
+}
+
 module.exports={
     getAllRestaurants: getAllRestaurants,
-    getResataurantByName: getResataurantByName
+    getResataurantByName: getResataurantByName,
+    getResataurantByCatId: getResataurantByCatId
 }

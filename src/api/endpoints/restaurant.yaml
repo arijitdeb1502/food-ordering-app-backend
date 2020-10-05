@@ -292,14 +292,14 @@ parameters:
     name: categoryId
     type: string
     in: path
-    format: uuid
+    # format: uuid
     required: true
-    description: Unique identifier of the category in a standard UUID format
+    description: Unique identifier of the category
   restaurantId:
     name: restaurantId
     type: string
     in: path
-    format: uuid
+    # format: uuid
     required: true
     description: Unique identifier of Restaurant in a standard UUID format
   BearerAuthorization:
@@ -323,7 +323,7 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
+        # format: uuid
         description: Unique identifier of the restaurant in a standard UUID format
       restaurant_name:
         type: string
@@ -345,8 +345,8 @@ definitions:
         properties:
           id:
             type: string
-            format: uuid
-            description: Unique identifier of the address in a standard UUID format
+            # format: uuid
+            description: Unique identifier of the address
           flat_building_name:
             type: string
             description: Flat and building address
@@ -364,8 +364,8 @@ definitions:
             properties:
               id:
                 type: string
-                format: uuid
-                description: Unique identifier of the state in a standard UUID format
+                # format: uuid
+                description: Unique identifier of the state 
               state_name:
                 type: string
                 description: Name of the state
@@ -381,8 +381,8 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
-        description: Unique identifier of the restaurant in a standard UUID format
+        # format: uuid
+        description: Unique identifier of the restaurant
       status:
         type: string
         description: status of the updated restaurant
@@ -394,8 +394,8 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
-        description: Unique identifier of the restaurant in a standard UUID format
+        # format: uuid
+        description: Unique identifier of the restaurant
       restaurant_name:
         type: string
         description: Name of the restaurant
@@ -416,8 +416,8 @@ definitions:
         properties:
           id:
             type: string
-            format: uuid
-            description: Unique identifier of the address in a standard UUID format
+            # format: uuid
+            description: Unique identifier of the address
           flat_building_name:
             type: string
             description: Flat and building address
@@ -435,8 +435,8 @@ definitions:
             properties:
               id:
                 type: string
-                format: uuid
-                description: Unique identifier of the state in a standard UUID format
+                # format: uuid
+                description: Unique identifier of the state
               state_name:
                 type: string
                 description: Name of the state
@@ -448,8 +448,8 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
-        description: Unique identifier of the category in a standard UUID format
+        # format: uuid
+        description: Unique identifier of the category
       category_name:
         type: string
         description: Name of the category
@@ -464,8 +464,8 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
-        description: Unique identifier of the item in a standard UUID format
+        # format: uuid
+        description: Unique identifier of the item 
       item_name:
         type: string
         description: Name of the item
