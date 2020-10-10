@@ -293,7 +293,7 @@ parameters:
     type: string
     in: path
     # format: uuid
-    required: true
+    # required: true
     description: Unique identifier of the category
   restaurantId:
     name: restaurantId

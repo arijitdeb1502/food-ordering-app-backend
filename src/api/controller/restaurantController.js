@@ -1,6 +1,7 @@
 const responses = require('../../constants/response');
 const restaurantService = require('../../service/restaurantService');
 const RestaurantNotFoundException = require('../../errors/RestaurantNotFoundException');
+const CategoryNotFoundException = require('../../errors/CategoryNotFoundException'); 
 
 const getAllRestaurants = async(req,res)=>{
     let response={};
@@ -52,10 +53,30 @@ const getResataurantByName=async (req,res)=>{
 
 const getResataurantByCatId=async (req,res)=>{
 
-    const responseFromService = await restaurantService.getRestaurantsByCategoryId(req.params.category_id);
+    let response={};
+    let returnCode=400;
 
+    
+    try{
+        if(req.params.category_id.split("").length!==24){
+            response.error = "Category id field should not be empty or invalid!";
+            // returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+            throw new CategoryNotFoundException("CNF-001","Category id field should not be empty or invalid!")
+        }
+        const responseFromService = await restaurantService.getRestaurantsByCategoryId(req.params.category_id);
+        response=responseFromService;
 
-    res.status(200).send(responseFromService);
+    }catch(error){
+        console.log('Something went wrong: restaurantController: getResataurantByCatId', error);    
+        response.error = error.message;
+
+        if(error.message.includes("CNF-002")){
+            response.error = 'No category found by category Id';
+            returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
+        }
+    }    
+
+    res.status(returnCode).send(response);
 
 
 }

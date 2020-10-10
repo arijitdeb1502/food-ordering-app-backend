@@ -115,7 +115,7 @@ parameters:
     name: categoryId
     type: string
     in: path
-    format: uuid
+    # format: uuid
     required: true
     description: Unique identifier of the category in a standard UUID format
 definitions:
@@ -133,7 +133,7 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
+        # format: uuid
         description: Unique identifier of the category in a standard UUID format
       category_name:
         type: string
@@ -143,7 +143,7 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
+        # format: uuid
         description: Unique identifier of the category in a standard UUID format
       category_name:
         type: string
@@ -159,7 +159,7 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
+        # format: uuid
         description: Unique identifier of the item in a standard UUID format
       item_name:
         type: string

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Restaurant = require('../db/model/restaurant');
 const Category = require('../db/model/category');
 const RestaurantNotFoundException=require('../errors/RestaurantNotFoundException');
+const CategoryNotFoundException=require('../errors/CategoryNotFoundException'); 
 
 const getAllRestaurants = async()=>{
 
@@ -99,7 +100,13 @@ const getResataurantByName=async(restaurant_name)=>{
 
 const getRestaurantsByCategoryId = async(category_id)=>{
 
+
   const category=await Category.findById(category_id);
+
+  if(!category){
+      throw new CategoryNotFoundException("CNF-002","No category by this id");
+  }
+
   const restaurants=await Restaurant.find({})
 
     const populatesRestaurants=[];
