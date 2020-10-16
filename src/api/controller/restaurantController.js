@@ -87,11 +87,9 @@ const getResataurantByRestId = async(req,res)=>{
     let returnCode=400;
 
     const responseFromService=await restaurantService.getRestaurantsByRestId(req.params.restaurant_id)
-    console.log(responseFromService);
+    // console.log({...responseFromService});
 
-    res.status(200).send({
-
-    });
+    res.status(200).send(responseFromService);
 
 }
 
