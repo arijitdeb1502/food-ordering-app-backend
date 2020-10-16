@@ -148,8 +148,6 @@ const getRestaurantsByCategoryId = async(category_id)=>{
 
 const getRestaurantsByRestId = async (restaurant_id)=>{
 
-
-    //  const categories=[];
      const restRetFromService = {} 
      const restaurant=await Restaurant.findById(restaurant_id)
                                 .populate('address');
@@ -178,19 +176,16 @@ const getRestaurantsByRestId = async (restaurant_id)=>{
             itemList[item.category]=[]
           }
           const itemObj={
-            // category: item.category,
             id: item.item_id,
             name: item.item_name,
             price: item.price,
             type: item.type
           }
-          // console.log(itemObj);
-          // itemList[item.category].push(JSON.stringify(itemObj));
-                    itemList[item.category].push(itemObj);
+          
+          itemList[item.category].push(itemObj);
 
         
       }
-      // console.log(itemlist.toJSON());
       let {_id,flat_building_name,locality,city,pincode,state}=restaurant.address;
       let {state_uuid,state_name} = restaurant.address.state;
       restRetFromService.id=restaurant._id;
