@@ -81,8 +81,23 @@ const getResataurantByCatId=async (req,res)=>{
 
 }
 
+const getResataurantByRestId = async(req,res)=>{
+
+    let response={};
+    let returnCode=400;
+
+    const responseFromService=await restaurantService.getRestaurantsByRestId(req.params.restaurant_id)
+    console.log(responseFromService);
+
+    res.status(200).send({
+
+    });
+
+}
+
 module.exports={
     getAllRestaurants: getAllRestaurants,
     getResataurantByName: getResataurantByName,
-    getResataurantByCatId: getResataurantByCatId
+    getResataurantByCatId: getResataurantByCatId,
+    getResataurantByRestId: getResataurantByRestId
 }

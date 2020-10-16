@@ -14,4 +14,8 @@ router.get('/category/:category_id',
     restaurantController.getResataurantByCatId
 )
 
+router.get('/:restaurant_id',
+    restaurantController.getResataurantByRestId           
+)
+
 module.exports = router;
