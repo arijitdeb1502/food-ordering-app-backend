@@ -11,6 +11,8 @@ const getAllRestaurants = async()=>{
 
       const restaurants=await Restaurant.find({});
 
+
+
       const populatesRestaurants=[];
       for(let restaurant of restaurants){
         
@@ -108,7 +110,11 @@ const getRestaurantsByCategoryId = async(category_id)=>{
       throw new CategoryNotFoundException("CNF-002","No category by this id");
   }
 
-  const restaurants=await Restaurant.find({})
+  const restaurants=await Restaurant.find({});
+
+  if(!restaurant){
+    throw new RestaurantNotFoundException("RNF-001","No Restaurant found by that id!")
+  }
 
     const populatesRestaurants=[];
       for(let restaurant of restaurants){

@@ -65,6 +65,9 @@ const getResataurantByCatId=async (req,res)=>{
         }
         const responseFromService = await restaurantService.getRestaurantsByCategoryId(req.params.category_id);
         response=responseFromService;
+        returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+
 
     }catch(error){
         console.log('Something went wrong: restaurantController: getResataurantByCatId', error);    
@@ -86,10 +89,34 @@ const getResataurantByRestId = async(req,res)=>{
     let response={};
     let returnCode=400;
 
-    const responseFromService=await restaurantService.getRestaurantsByRestId(req.params.restaurant_id)
+
+    try{
+
+        if(req.params.restaurant_id.split("").length!==24){
+            response.error = "restaurant id field should not be empty or invalid!";
+            // returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+            throw new RestaurantNotFoundException("RNF-002","Restaurant id field should not be empty or invalid!")
+        }
+        const responseFromService=await restaurantService.getRestaurantsByRestId(req.params.restaurant_id)
+        response=responseFromService;
+        returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+    }catch(error){
+        console.log('Something went wrong: restaurantController: getResataurantByCatId', error);    
+        response.error = error.message;
+
+        if(error.message.includes("RNF-002")){
+            response.error = 'Restaurant id field should not be empty or invalid!';
+            returnCode=responses.responseDetails.returnCodes.UNPROCESSABLE_ENTITY;
+        }else if(error.message.includes("RNF-001")){
+            response.error = 'Restaurant not found by that id';
+            returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
+        }
+
+    }
     // console.log({...responseFromService});
 
-    res.status(200).send(responseFromService);
+    res.status(returnCode).send(response);
 
 }
 
