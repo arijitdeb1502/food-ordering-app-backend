@@ -208,9 +208,35 @@ const getRestaurantsByRestId = async (restaurant_id)=>{
 
 }
 
+const updateRestaurantDetails = async (restaurant_id,newRating)=>{
+
+    const restaurant=await Restaurant.findById(restaurant_id);
+
+    try{
+        
+        if(!restaurant){
+          throw new RestaurantNotFoundException("RNF-001","No Restaurant found by that id!")
+        }
+
+        restaurant['customer_rating']=newRating;
+        const updatedRestaurant=await restaurant.save();
+
+        return updatedRestaurant;
+        
+    }catch(error){
+
+      console.log('Something went wrong: restaurantService: updateRestaurantDetails', error);
+      throw new Error(error);
+
+    }
+  
+
+}
+
 module.exports = {
     getAllRestaurants: getAllRestaurants,
     getResataurantByName: getResataurantByName,
     getRestaurantsByCategoryId:getRestaurantsByCategoryId,
-    getRestaurantsByRestId: getRestaurantsByRestId
+    getRestaurantsByRestId: getRestaurantsByRestId,
+    updateRestaurantDetails: updateRestaurantDetails
 }

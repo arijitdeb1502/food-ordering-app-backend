@@ -1,3 +1,4 @@
+const uuid = require('uuid');
 const responses = require('../../constants/response');
 const restaurantService = require('../../service/restaurantService');
 const RestaurantNotFoundException = require('../../errors/RestaurantNotFoundException');
@@ -120,9 +121,25 @@ const getResataurantByRestId = async(req,res)=>{
 
 }
 
+
+const updateRestaurantDetails = async (req,res)=>{
+
+    console.log(parseFloat(req.query.rating));
+    console.log(req.params);
+    console.log(req.decoded);
+
+    const responseFromService=restaurantService.updateRestaurantDetails(req.params.restaurant_id,req.query.rating);
+    
+    //updateRestaurantDetails
+
+    res.status(200).send({});
+
+}
+
 module.exports={
     getAllRestaurants: getAllRestaurants,
     getResataurantByName: getResataurantByName,
     getResataurantByCatId: getResataurantByCatId,
-    getResataurantByRestId: getResataurantByRestId
+    getResataurantByRestId: getResataurantByRestId,
+    updateRestaurantDetails: updateRestaurantDetails
 }

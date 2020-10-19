@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const restaurantController=require('../api/controller/restaurantController');
+const auth = require('../api/middleware/auth');
 
 router.get('/',
     restaurantController.getAllRestaurants
@@ -16,6 +17,12 @@ router.get('/category/:category_id',
 
 router.get('/:restaurant_id',
     restaurantController.getResataurantByRestId           
+)
+
+router.put('/:restaurant_id',
+    auth.authenticate(),
+    restaurantController.updateRestaurantDetails,
+    // auth.sendUpdateRestaurantResponse
 )
 
 module.exports = router;
