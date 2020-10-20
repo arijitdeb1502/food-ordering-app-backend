@@ -194,7 +194,6 @@ const generateAuthTokenAndRespondToUpdateRestaurant = (req,res)=>{
     let returnCode;
     try{
 
-        console.log("Arijit"+req.request_id)
         let {id,request_id,status} = {...req};
         returnCode=req.returnCode;
 
