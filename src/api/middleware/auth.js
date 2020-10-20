@@ -38,27 +38,24 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
     let response={};
     let returnCode;
     try{
-        let {customer,respMessage} = {...req};
+        let {id,request_id,status,returnCode} = {...req};
         returnCode=req.returnCode;
         
         const token = jwt.sign({ _id: customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
-        res.setHeader('request-id',customer.request_id);
+        res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
 
-        response.id=customer._id;
-        response.message=respMessage;
-        response.first_name=customer.first_name;
-        response.last_name=customer.last_name;
-        response.email_address=customer.email_address;
-        response.contact_number=customer.contact_number;
+        response.id=id;
+        response.status=status;
+        // response.returnCode=returnCode;
 
     }catch(error){
 
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
         response.error = 'Cannot generate Auth Token and send response!!';
 
-        console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
+        console.log('Error in auth generateAuthTokenAndRespondToUpdateRestaurany'+error);
         throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }
@@ -197,6 +194,7 @@ const generateAuthTokenAndRespondToUpdateRestaurant = (req,res)=>{
     let returnCode;
     try{
 
+        console.log("Arijit"+req.request_id)
         let {id,request_id,status} = {...req};
         returnCode=req.returnCode;
 
@@ -213,7 +211,7 @@ const generateAuthTokenAndRespondToUpdateRestaurant = (req,res)=>{
         returnCode=responses.responseDetails.returnCodes.INTERNAL_SERVER_ERROR;
         response.error = 'Cannot generate Auth Token and send response!!';
 
-        console.log('Error in auth generateAuthTokenAndRespondToLogin'+error);
+        console.log('Error in auth generateAuthTokenAndRespondToUpdateRestaurant'+error);
         throw new AuthorizationFailedException('ATHR-006','Error generating JSON Web Token');
 
     }

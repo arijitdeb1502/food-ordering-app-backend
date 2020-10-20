@@ -21,8 +21,8 @@ router.get('/:restaurant_id',
 
 router.put('/:restaurant_id',
     auth.authenticate(),
-    restaurantController.updateRestaurantDetails,
-    // auth.sendUpdateRestaurantResponse
+    restaurantController.updateRestaurantDetails(),
+    auth.generateAuthTokenAndRespondToUpdateRestaurant
 )
 
 module.exports = router;

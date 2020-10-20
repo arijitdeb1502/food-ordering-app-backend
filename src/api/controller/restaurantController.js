@@ -122,17 +122,42 @@ const getResataurantByRestId = async(req,res)=>{
 }
 
 
-const updateRestaurantDetails = async (req,res)=>{
+const updateRestaurantDetails = ()=>{
 
-    console.log(parseFloat(req.query.rating));
-    console.log(req.params);
-    console.log(req.decoded);
+    return async (req,res,next)=>{
 
-    const responseFromService=restaurantService.updateRestaurantDetails(req.params.restaurant_id,req.query.rating);
+        let response={  };
+        let returnCode=400;
+        const request_id=uuid.v4();
+
+        try{
+
+            const responseFromService=await restaurantService.updateRestaurantDetails(req.params.restaurant_id,req.query.rating);
+        
+            res.setHeader('location','restaurant model');
+
+            req.id=responseFromService._id;
+            req.request_id=request_id;
+            req.status=responses.responseDetails.restaurantUpdateSuccess.message;
+            req.returnCode=responses.responseDetails.returnCodes.CREATE_SUCCESS;
+
+            next();
+
+        }catch(error){  
+
+            console.log('Something went wrong: restaurantController: saveRestaurant', error);
+            
+                response.error = error.message;
     
-    //updateRestaurantDetails
+                if ( error.message.includes('RNF-001')) {
+                    response.error = 'No Restaurant found by the id provided!';
+                    returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
+                 }
 
-    res.status(200).send({});
+                return res.status(returnCode).send(response);
+
+        }
+    }
 
 }
 

@@ -31,6 +31,9 @@ const responseDetails = {
     },
     addressDeleteSuccess: {
         message : 'ADDRESS DELETED SUCCESSFULLY'
+    },
+    restaurantUpdateSuccess: {
+        message : 'RESTAURANT RATING UPDATED SUCCESSFULLY'
     }
 }
 

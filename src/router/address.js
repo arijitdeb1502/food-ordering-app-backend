@@ -5,7 +5,7 @@ const reqValidator = require('../api/middleware/reqValidator')
 // const base54Decoder = require('../api/middleware/base64Decoder');
 const auth = require('../api/middleware/auth');
 const addressSchema = require('../api/requestSchema/address');
-
+ 
 router.post('/',
   reqValidator.validateBody(addressSchema.saveAddressRequest),
   auth.authenticate(),
