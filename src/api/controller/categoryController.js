@@ -29,6 +29,15 @@ const getAllCategories = async (req,res)=>{
 
 }
 
+const getCategoryById = async (req,res)=>{
+
+    const resFromService=await categoryService.getItemsByCategoryId(req.params.category_id);
+
+    res.status(200).send(resFromService);
+
+}
+
 module.exports = {
-    getAllCategories:getAllCategories
+    getAllCategories:getAllCategories,
+    getCategoryById:getCategoryById
 }

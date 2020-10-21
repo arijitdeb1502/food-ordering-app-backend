@@ -6,4 +6,8 @@ router.get('/category',
     categoryController.getAllCategories
 )
 
+router.get('/category/:category_id',
+    categoryController.getCategoryById
+)
+
 module.exports = router;
