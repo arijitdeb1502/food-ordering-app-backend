@@ -5,9 +5,27 @@ const categoryService = require('../../service/categoryService');
 
 const getAllCategories = async (req,res)=>{
 
-    const categories=await categoryService.getAllCategories();
+    let response=[];
+    let returnCode=400;
 
-    res.status(200).send(categories);
+    try{
+        const categories=await categoryService.getAllCategories();
+        categories.map((category)=>{
+    
+            response.push(category);
+
+        })
+
+        returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+    }catch(error){
+        console.log('Something went wrong: categoryController: getAllCategories', error);
+            response={}
+            response.error = error.message;
+    }
+    
+
+    return res.status(returnCode).send(response);
 
 }
 
