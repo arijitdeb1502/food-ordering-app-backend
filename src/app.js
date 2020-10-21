@@ -33,6 +33,7 @@ const addressRouter = require('./router/address');
 const stateRouter = require('./router/state');
 const restaurantRouter = require('./router/restaurant');
 const itemRouter = require('./router/item');
+const categoryRouter = require('./router/category');
 
 
 const app = express();
@@ -56,6 +57,7 @@ app.use('/api/address', addressRouter);
 app.use('/api/states',stateRouter);
 app.use('/api/restaurant',restaurantRouter);
 app.use('/item/restaurant',itemRouter);
+app.use('',categoryRouter);
 
 
 module.exports = app;

@@ -16,9 +16,6 @@ const getItemsOfRestaurant = async (req,res)=>{
     
     }catch(error){
         console.log('Something went wrong: itemController: getItemsOfRestaurant', error);
-
-        console.log(error.message+"Arijit@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
         response.error=error.message;
         if ( error.message.includes('RNF-001')){
             response={}
