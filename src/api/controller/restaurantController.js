@@ -132,7 +132,7 @@ const updateRestaurantDetails = ()=>{
 
         try{
 
-            const responseFromService=await restaurantService.updateRestaurantDetails(req.params.restaurant_id,req.query.rating);
+            const responseFromService=await restaurantService.updateRestaurantDetails(req.params.restaurant_id,req.query.customer_rating);
         
             res.setHeader('location','restaurant model');
 
