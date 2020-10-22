@@ -139,7 +139,7 @@ const updateRestaurantDetails = ()=>{
             req.id=responseFromService._id;
             req.request_id=request_id;
             req.status=responses.responseDetails.restaurantUpdateSuccess.message;
-            req.returnCode=responses.responseDetails.returnCodes.CREATE_SUCCESS;
+            req.returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
 
             next();
 

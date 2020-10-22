@@ -104,7 +104,7 @@ const sendUpdateAddressResponse = (req,res)=>{
         let {id,request_id,status} = {...req};
         returnCode=req.returnCode;
 
-        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
+        const token = jwt.sign({ _id: req.decoded._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
 
         res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
@@ -165,7 +165,7 @@ const sendDeleteAddressResponse = (req,res)=>{
         let {id,request_id,status} = {...req};
         returnCode=req.returnCode;
 
-        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
+        const token = jwt.sign({ _id: req.decoded._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
 
         res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
@@ -197,7 +197,7 @@ const generateAuthTokenAndRespondToUpdateRestaurant = (req,res)=>{
         let {id,request_id,status} = {...req};
         returnCode=req.returnCode;
 
-        const token = jwt.sign({ _id: id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
+        const token = jwt.sign({ _id: req.decoded._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
 
         res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
