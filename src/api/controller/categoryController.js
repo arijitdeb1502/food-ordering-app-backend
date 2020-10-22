@@ -31,9 +31,31 @@ const getAllCategories = async (req,res)=>{
 
 const getCategoryById = async (req,res)=>{
 
-    const resFromService=await categoryService.getItemsByCategoryId(req.params.category_id);
 
-    res.status(200).send(resFromService);
+    let response=[];
+    let returnCode=400;
+
+    try{
+
+        const resFromService=await categoryService.getItemsByCategoryId(req.params.category_id);
+        response=resFromService;
+        returnCode=responses.responseDetails.returnCodes.GENERIC_SUCCESS;
+
+    }catch(error){
+
+        console.log('Something went wrong: categoryController: getCategoryById', error);
+            response={}
+            response.error = error.message;
+
+            if ( error.message.includes('CNF-001')){
+                response.error="No category Found by the given category_id!"
+                returnCode=responses.responseDetails.returnCodes.RESOURCE_NOT_FOUND;
+            }
+
+    }
+    
+
+    res.status(returnCode).send(response);
 
 }
 
