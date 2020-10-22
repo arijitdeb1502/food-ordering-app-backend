@@ -112,7 +112,7 @@ const getRestaurantsByCategoryId = async(category_id)=>{
 
   const restaurants=await Restaurant.find({});
 
-  if(!restaurant){
+  if(!restaurants){
     throw new RestaurantNotFoundException("RNF-001","No Restaurant found by that id!")
   }
 

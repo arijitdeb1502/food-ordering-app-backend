@@ -40,7 +40,7 @@ const getItemsByCategoryId = async(cat_id)=>{
             }
 
         })
-
+  
         respFromService.id=category._id;
         respFromService.category_name=category.category_name;
         respFromService.item_list=itemArray;

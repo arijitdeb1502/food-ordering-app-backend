@@ -57,7 +57,7 @@ const getResataurantByCatId=async (req,res)=>{
     let response={};
     let returnCode=400;
 
-    
+     
     try{
         if(req.params.category_id.split("").length!==24){
             response.error = "Category id field should not be empty or invalid!";

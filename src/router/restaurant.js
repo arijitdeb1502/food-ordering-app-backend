@@ -6,7 +6,7 @@ const auth = require('../api/middleware/auth');
 router.get('/',
     restaurantController.getAllRestaurants
 )
-
+  
 router.get('/name/:restaurant_name',
     restaurantController.getResataurantByName
 )
