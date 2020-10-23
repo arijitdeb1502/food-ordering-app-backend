@@ -41,6 +41,7 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         let {id,request_id,status,returnCode} = {...req};
         returnCode=req.returnCode;
         
+        console.log(req.decoded+"ARIJIT");
         const token = jwt.sign({ _id: req.decoded._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
         res.setHeader('request-id',request_id);
