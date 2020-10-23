@@ -38,10 +38,10 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
     let response={};
     let returnCode;
     try{
-        let {id,request_id,status,returnCode} = {...req};
-        returnCode=req.returnCode;
+        let {id,status,returnCode} = {...req};
+        // returnCode=req.returnCode;
         
-        console.log(JSON.stringify(req.customer)+"ARIJIT");
+        console.log(returnCode+"ARIJIT");
         const token = jwt.sign({ _id: req.customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
         // res.setHeader('request-id',request_id);
