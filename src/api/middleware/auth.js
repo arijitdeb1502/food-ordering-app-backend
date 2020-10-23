@@ -61,6 +61,7 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
 
     }
 
+    console.log(response+"ABHI");
     res.status(returnCode).send(response);
     
 }
