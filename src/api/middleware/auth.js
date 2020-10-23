@@ -41,8 +41,8 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         let {id,request_id,status,returnCode} = {...req};
         returnCode=req.returnCode;
         
-        console.log(JSON.stringify(req)+"ARIJIT");
-        const token = jwt.sign({ _id: req.decoded._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
+        console.log(JSON.stringify(req.customer)+"ARIJIT");
+        const token = jwt.sign({ _id: req.customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
         res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
