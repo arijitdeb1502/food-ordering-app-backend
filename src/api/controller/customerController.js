@@ -62,7 +62,7 @@ const login = ()=>{
             req.respMessage='LOGGED IN SUCCESSFULLY';
             req.returnCode=responses.responseDetails.returnCodes.AUTHENTICATION_SUCCESS;
 
-            console.log(req+"Controller");
+            console.log(JSON.stringify(req.customer)+"Controller");
             next();
 
         }catch(error){
