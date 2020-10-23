@@ -38,8 +38,8 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
     let response={};
     let returnCode;
     try{
-        let {id,status,returnCode} = {...req};
-        // returnCode=req.returnCode;
+        // let {id,status,returnCode} = {...req};
+        let returnCode=req.returnCode;
         
         console.log(returnCode+"ARIJIT");
         const token = jwt.sign({ _id: req.customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
@@ -65,8 +65,8 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
 
     }
 
-    console.log(JSON.stringify(response)+"ABHI");
-    res.status(200).send(response);
+    console.log(returnCode+"ABHI");
+    res.status(returnCode).send(response);
     
 }
 
