@@ -47,8 +47,12 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         // res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
 
-        response.id=id;
-        response.status=status;
+        response.id=req.customer._id;
+        response.message="Logged In Successfully";
+        response.first_name=req.customer.first_name;
+        response.last_name=req.customer.last_name;
+        response.email_address=req.customer.email_address;
+        response.contact_number=req.customer.contact_number;
         // response.returnCode=returnCode;
 
     }catch(error){
