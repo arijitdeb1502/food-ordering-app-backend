@@ -44,7 +44,7 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         console.log(JSON.stringify(req.customer)+"ARIJIT");
         const token = jwt.sign({ _id: req.customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
-        res.setHeader('request-id',request_id);
+        // res.setHeader('request-id',request_id);
         res.setHeader('access-token',token);
 
         response.id=id;
