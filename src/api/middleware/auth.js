@@ -41,7 +41,6 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         // let {id,status,returnCode} = {...req};
         returnCode=req.returnCode;
         
-        console.log(returnCode+"ARIJIT");
         const token = jwt.sign({ _id: req.customer._id.toString() }, process.env.JWT_SECRET , { expiresIn: '5 days' });
     
         // res.setHeader('request-id',request_id);
@@ -53,7 +52,6 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
         response.last_name=req.customer.last_name;
         response.email_address=req.customer.email_address;
         response.contact_number=req.customer.contact_number;
-        // response.returnCode=returnCode;
 
     }catch(error){
 
@@ -65,7 +63,6 @@ const generateAuthTokenAndRespondToLogin = (req,res)=>{
 
     }
 
-    console.log(returnCode+"ABHI");
     res.status(returnCode).send(response);
     
 }
